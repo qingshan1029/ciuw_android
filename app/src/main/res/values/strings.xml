@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">CIUWApp</string>
+    <string name="login_email_hint">test@example.com</string>
+    <string name="login_password_hint">Password</string>
+    <string name="login_email">Email</string>
+    <string name="login_password">Password</string>
+    <string name="login_pw_forgot">Forgot your password?</string>
+    <string name="login_btn_login">LOGIN</string>
+    <string name="login_btn_register">REGISTER</string>
+    <string name="login_first_name">First Name</string>
+    <string name="login_last_name">Last Name</string>
+</resources>

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="headerTextSize">25sp</dimen>
+    <dimen name="newsMoreTextSize">12sp</dimen>
+    <dimen name="loginViewMarginTopSize">20dp</dimen>
+    <dimen name="loginViewMarginLeftSize">40dp</dimen>
+    <dimen name="loginViewTextSize">16sp</dimen>
+    <dimen name="loginControlSize">40dp</dimen>
+    <dimen name="registerViewMarginTopSize">5dp</dimen>
+    <dimen name="HomeTextSize">14sp</dimen>
+    <dimen name="HomeMarginLeft">38dp</dimen>
+    <dimen name="HomeMarginRight">38dp</dimen>
+    <dimen name="HomeMarginTop">15dp</dimen>
+    <dimen name="HomeMarginBottom">5dp</dimen>
+    <dimen name="HomeCardMarginLeft">15dp</dimen>
+    <dimen name="HomeCardMarginRight">45dp</dimen>
+    <dimen name="HomeCardMarginTop">25dp</dimen>
+    <dimen name="HomeCardMarginBottom">20dp</dimen>
+</resources>
