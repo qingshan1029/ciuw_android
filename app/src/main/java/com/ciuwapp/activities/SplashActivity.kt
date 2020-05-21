@@ -32,6 +32,7 @@ class SplashActivity : AppCompatActivity() {
                     val userData: UserData? = result
                     if (userData?.token != null) {
                         AppHelper.userProfile = userData.user
+                        PrefsManager.newInstance(this)?.setToken(userData?.token)
                         launchHomeActivity()
                     } else {
                         launchLoginActivity()

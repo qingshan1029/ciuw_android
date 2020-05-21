@@ -10,8 +10,11 @@ import com.ciuwapp.prefs.PrefsManager
 import kotlinx.android.synthetic.main.activity_home.*
 import kotlinx.android.synthetic.main.layout_dialog.view.*
 import androidx.appcompat.app.AlertDialog
+import com.ciuwapp.api.ClientAPIService
 
 class HomeActivity : AppCompatActivity() {
+
+    private var webURL : String = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -30,19 +33,23 @@ class HomeActivity : AppCompatActivity() {
         }
 
         id_home_benefits.setOnClickListener {
-            launchCalendarActivity()
+            webURL = "contents/benefits"
+            launchWebViewActivity()
         }
 
         id_home_contract.setOnClickListener {
-            launchCalendarActivity()
+            webURL = "contents/contract"
+            launchWebViewActivity()
         }
 
         id_home_meeting.setOnClickListener {
-            launchCalendarActivity()
+            webURL = "contents/meeting"
+            launchWebViewActivity()
         }
 
         id_home_contact.setOnClickListener {
-            launchCalendarActivity()
+            webURL = "contents/contact"
+            launchWebViewActivity()
         }
     }
 
@@ -94,4 +101,11 @@ class HomeActivity : AppCompatActivity() {
         startActivity(intent)
         finish()
     }
+
+    private fun launchWebViewActivity() {
+        val intent = Intent(this, WebViewActivity::class.java)
+        intent.putExtra("url", "${ClientAPIService.hostURL}${webURL}")
+        startActivity(intent)
+    }
+
 }
