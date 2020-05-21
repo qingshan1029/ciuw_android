@@ -5,7 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
 import com.ciuwapp.R
-import com.ciuwapp.api.ClientLoginService
+import com.ciuwapp.api.ClientAPIService
 
 import com.ciuwapp.data.UserData
 import com.ciuwapp.helpers.AppHelper
@@ -27,7 +27,7 @@ class SplashActivity : AppCompatActivity() {
                 launchLoginActivity()
             }, 2000)
         } else {
-            ClientLoginService.requestLogin(email!!, password!!) { succeeded, result ->
+            ClientAPIService.requestLogin(email!!, password!!) { succeeded, result ->
                 if (succeeded) {
                     val userData: UserData? = result
                     if (userData?.token != null) {
@@ -42,13 +42,13 @@ class SplashActivity : AppCompatActivity() {
             }
         }
     }
-    fun launchHomeActivity() {
+    private fun launchHomeActivity() {
         var intent = Intent(this, HomeActivity::class.java)
         startActivity(intent)
         finish()
     }
 
-    fun launchLoginActivity(){
+    private fun launchLoginActivity(){
         var intent = Intent(this, LoginActivity::class.java)
         startActivity(intent)
         finish()

@@ -1,78 +1,86 @@
 package com.ciuwapp.activities
 
-
 import android.content.Intent
+import com.ciuwapp.R
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
 import android.view.View
 import android.widget.ImageView
-
-import com.ciuwapp.R
-import com.ciuwapp.api.ClientAPIService
-
 import com.ciuwapp.data.UserData
-
-import kotlinx.android.synthetic.main.activity_login.*
+import com.ciuwapp.api.ClientAPIService
 import com.ciuwapp.helpers.AppHelper
-import com.kaopiz.kprogresshud.KProgressHUD
-
 import com.ciuwapp.prefs.PrefsManager
+import com.kaopiz.kprogresshud.KProgressHUD
+import kotlinx.android.synthetic.main.activity_register.*
 
-class LoginActivity : AppCompatActivity() {
+
+class RegisterActivity : AppCompatActivity() {
 
     private lateinit var hud: KProgressHUD
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_login)
-
-        et_email.setText("test@dev.com")
-        et_password.setText("123456")
-
-        btn_login.setOnClickListener {
-            checkLogin()
-        }
+        setContentView(R.layout.activity_register)
 
         btn_register.setOnClickListener {
-            launchRegisterActivity()
+            createNewAccount()
+        }
+
+        btn_back.setOnClickListener {
+            launchLoginActivity()
         }
     }
 
-    private fun checkLogin() {
+    private fun createNewAccount() {
         var email = et_email.text.toString()
         var password = et_password.text.toString()
+        var firstname = et_first_name.text.toString()
+        var lastname = et_last_name.text.toString()
 
         if(!AppHelper.isEmailValid(email)){
             et_email.error = "Enter the valid email."
             return
         }
+        if( password?.length < 6) {
+            et_password.error = "Password should be 6 in length at least."
+            return
+        }
+        if(firstname?.isEmpty()){
+            et_first_name.error = "Enter your first name."
+            return
+        }
+        if(lastname?.isEmpty()){
+            et_last_name.error = "Enter your last name."
+            return
+        }
+
         hud = KProgressHUD.create(this)
         hud.show()
 
-        ClientAPIService.requestLogin(email, password) { succeeded, result ->
+        ClientAPIService.requestRegister(email, password, password, firstname, lastname) { succeeded, result ->
             hud.dismiss()
             if (succeeded) {
                 val userData: UserData? = result
                 if(userData?.token != null) {
                     AppHelper.userProfile = userData.user
 
-                    loginWrapper.visibility = View.GONE
+                    registerWrapper.visibility = View.GONE
                     val imageView = ImageView(this)
                     imageView.setBackgroundResource(R.mipmap.ic_checkmark)
                     PrefsManager.newInstance(this)?.setEmail(email)
                     PrefsManager.newInstance(this)?.setPassword(password)
 
                     hud.setCustomView(imageView)
-                        .setLabel("Login Successful")
+                        .setLabel("Register Successful")
                         .show()
                     Handler().postDelayed({
                         hud.dismiss()
-                        launchHomeActivity()
+                        launchLoginActivity()
                     }, 2000)
                 }
                 else{
-                    hud.setLabel("Failed to login")
+                    hud.setLabel("Failed to register")
                         .show()
                     Handler().postDelayed({
                         hud.dismiss()
@@ -80,7 +88,7 @@ class LoginActivity : AppCompatActivity() {
                 }
             }
             else {
-                hud.setLabel("Failed to login")
+                hud.setLabel("Failed to register")
                     .show()
                 Handler().postDelayed({
                     hud.dismiss()
@@ -88,16 +96,10 @@ class LoginActivity : AppCompatActivity() {
             }
         }
     }
-    private fun launchHomeActivity() {
-        val intent = Intent(this, HomeActivity::class.java)
+
+    private fun launchLoginActivity() {
+        val intent = Intent(this, LoginActivity::class.java)
         startActivity(intent)
         finish()
     }
-
-    private fun launchRegisterActivity() {
-        val intent = Intent(this@LoginActivity, RegisterActivity::class.java)
-        intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-        startActivity(intent)
-    }
-
 }
