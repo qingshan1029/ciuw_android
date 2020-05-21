@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="5dp">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:orientation="vertical"
+        android:weightSum="1">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="0.75"
+            android:orientation="horizontal"
+            android:background="@color/whiteTextColor"
+            android:weightSum="1">
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="0.15"
+                android:orientation="vertical"
+                android:background="@color/calendar_month_bkg_color"
+                android:gravity="center">
+
+                <TextView
+                    android:id="@+id/tv_calendar_month"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="MAY"
+                    android:textColor="@color/calendar_month_color"
+                    android:textSize="@dimen/CalendarMonthDaySize"
+                    android:textAlignment="center">
+                </TextView>
+                <TextView
+                    android:id="@+id/tv_calendar_day"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="15"
+                    android:textColor="@color/calendar_day_color"
+                    android:textSize="@dimen/CalendarMonthDaySize"
+                    android:textAlignment="center">
+                </TextView>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="0.85"
+                android:orientation="vertical"
+                android:gravity="center"
+                android:layout_marginLeft="10dp">
+                <TextView
+                    android:id="@+id/tv_calendar_content"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="The United Kingdom's four countries take a divided approach to"
+                    android:textColor="@color/calendar_day_color"
+                    android:textSize="@dimen/CalendarMonthDaySize">
+                </TextView>
+                <TextView
+                    android:id="@+id/tv_calendar_time"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="06:24 AM - 06:24 AM"
+                    android:textColor="@color/calendar_time_color"
+                    android:textSize="@dimen/CalendarMonthDaySize">
+                </TextView>
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="0.25"
+            android:background="@color/calendar_day_color"
+            android:orientation="horizontal"
+            android:weightSum="1">
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="0.1"
+                android:orientation="vertical"
+                android:gravity="center">
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/marker"
+                    android:tint="@color/whiteTextColor"
+                    android:layout_margin="4dp">
+
+                </ImageView>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="0.9"
+                android:orientation="vertical"
+                android:gravity="center">
+                <TextView
+                    android:id="@+id/tv_calendar_address"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Moscow, Russa"
+                    android:textColor="@color/whiteTextColor"
+                    android:textSize="@dimen/CalendarAddressSize">
+                </TextView>
+            </LinearLayout>
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+</LinearLayout>

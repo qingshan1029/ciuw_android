@@ -62,6 +62,7 @@ class LoginActivity : AppCompatActivity() {
                     imageView.setBackgroundResource(R.mipmap.ic_checkmark)
                     PrefsManager.newInstance(this)?.setEmail(email)
                     PrefsManager.newInstance(this)?.setPassword(password)
+                    PrefsManager.newInstance(this)?.setToken(userData?.token)
 
                     hud.setCustomView(imageView)
                         .setLabel("Login Successful")

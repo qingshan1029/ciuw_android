@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="5dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:background="@color/whiteTextColor">
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="0.15"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp"
+                android:orientation="vertical"
+                android:background="@color/calendar_month_bkg_color"
+                android:gravity="center">
+
+                <TextView
+                    android:id="@+id/tv_message_month"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="MAY"
+                    android:textColor="@color/calendar_month_color"
+                    android:textSize="@dimen/CalendarMonthDaySize"
+                    android:textAlignment="center">
+                </TextView>
+                <TextView
+                    android:id="@+id/tv_message_day"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="15"
+                    android:textColor="@color/calendar_day_color"
+                    android:textSize="@dimen/CalendarMonthDaySize"
+                    android:textAlignment="center">
+                </TextView>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="0.85"
+                android:orientation="vertical"
+                android:gravity="center"
+
+                android:layout_marginLeft="10dp">
+                <TextView
+                    android:id="@+id/tv_message_content"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Example mesage text..."
+                    android:textColor="@color/calendar_day_color"
+                    android:textSize="@dimen/CalendarMonthDaySize">
+                </TextView>
+            </LinearLayout>
+        </LinearLayout>
+
+    </LinearLayout>

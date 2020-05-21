@@ -10,6 +10,7 @@ class PrefsManager(context: Context){
     private val KEY_USERID = "userid"
     private val KEY_EMAIL = "email_address"
     private val KEY_PASSWORD = "userpassword"
+    private val KEY_TOKEN = "token"
 
     private val preferences: SharedPreferences = context.getSharedPreferences(PREF_NAME, PRIVATE_MODE)
 
@@ -36,6 +37,14 @@ class PrefsManager(context: Context){
     }
     fun getUserId(): String? {
         return preferences.getString(KEY_USERID, "")
+    }
+    fun setToken(value: String) {
+        val editor: SharedPreferences.Editor = preferences.edit()
+        editor.putString(KEY_TOKEN, value)
+        editor.commit()
+    }
+    fun getToken(): String {
+        return preferences.getString(KEY_TOKEN, "") ?: ""
     }
     fun logout(){
         val editor: SharedPreferences.Editor = preferences.edit()

@@ -17,4 +17,10 @@
     <color name="primaryTextColor">#11CFC5</color>
     <color name="login_btn_bk_color">#E23940</color>
     <color name="home_text_color">#FF000A</color>
+
+
+    <color name="calendar_month_color">#03A9F4</color>
+    <color name="calendar_day_color">#BD0800</color>
+    <color name="calendar_time_color">#727272</color>
+    <color name="calendar_month_bkg_color">#E2E2E2</color>
 </resources>

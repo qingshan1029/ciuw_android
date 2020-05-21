@@ -1,12 +1,12 @@
 package com.ciuwapp.api
 import android.util.Log
+import com.ciuwapp.data.*
 
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.http.*
-import com.ciuwapp.data.UserData
 import com.ciuwapp.prefs.PrefsManager
 import retrofit2.converter.gson.GsonConverterFactory
 
@@ -65,6 +65,55 @@ class ClientAPIService {
             })
         }
 
+        fun requestMessage(
+            token: String, callback: (succeeded: Boolean, result: MessageData?) -> Unit
+        ) {
+            client.requestMessage("Bearer $token").enqueue(object: Callback<MessageResponse>{
+
+                override fun onFailure(call: Call<MessageResponse>, t: Throwable) {
+                    Log.d(
+                        "ClientAPIService",
+                        "Could not get network status ${t.localizedMessage}"
+                    )
+                    callback(false, null)
+                }
+                override fun onResponse(call: Call<MessageResponse>, response: Response<MessageResponse>) {
+                    Log.d("ClientAPIService-TOKEN", " ${response}")
+                    Log.d("ClientAPIService", "Got the message data ${response.body()}")
+                    if (response.body() != null) {
+                        var postResponse = response.body()!!
+                        callback(true, postResponse.messages)
+                    } else {
+                        callback(false, null)
+                    }
+                }
+            })
+        }
+        fun requestCalendar(
+            token: String, callback: (succeeded: Boolean, result: CalendarData?) -> Unit
+        ) {
+            client.requestCalendar("Bearer $token").enqueue(object: Callback<CalendarResponse>{
+
+                override fun onFailure(call: Call<CalendarResponse>, t: Throwable) {
+                    Log.d(
+                        "ClientAPIService",
+                        "Could not get network status ${t.localizedMessage}"
+                    )
+                    callback(false, null)
+                }
+                override fun onResponse(call: Call<CalendarResponse>, response: Response<CalendarResponse>) {
+                    Log.d("ClientAPIService-TOKEN", " ${response}")
+                    Log.d("ClientAPIService", "Got the calendar data ${response.body()}")
+                    if (response.body() != null) {
+                        var postResponse = response.body()!!
+                        callback(true, postResponse.events)
+                    } else {
+                        callback(false, null)
+                    }
+                }
+            })
+        }
+
     }
 }
 
@@ -85,6 +134,16 @@ interface ClientLoginAPIClient{
         @Field("firstname") first_name:String,
         @Field("lastname") last_name:String
         ) : Call<UserData>
+
+    //@GET("api/Profiles/GetProfile?id={id}")
+
+    @POST("messages?page=1")
+    fun requestMessage(@Header("Authorization") token: String): Call<MessageResponse>
+
+
+    @POST("events?page=1")
+    fun requestCalendar(@Header("Authorization") token: String): Call<CalendarResponse>
+
 
     companion object Factory {
         fun create(): ClientLoginAPIClient {
