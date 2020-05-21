@@ -7,6 +7,7 @@ import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.http.*
 import com.ciuwapp.data.UserData
+import com.ciuwapp.prefs.PrefsManager
 import retrofit2.converter.gson.GsonConverterFactory
 
 class ClientAPIService {
@@ -27,7 +28,7 @@ class ClientAPIService {
                     )
                     callback(false, null)
                 }
-                override fun onResponse(call: Call<UserData>, response: Re2ponse<UserData>) {
+                override fun onResponse(call: Call<UserData>, response: Response<UserData>) {
                     Log.d("ClientAPIService", "Got the user back ${response.body()}")
                     val code = response.code()
                     if (response.body() != null) {
