@@ -4,47 +4,78 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:padding="10dp"
-    android:background="#2196F3">
-
-    <TextView
-        android:id="@+id/dialogTitle"
+    android:gravity="center"
+    android:background="@color/alert_bkg_color"
+    >
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textAlignment="center"
-        android:textSize="18sp"
-        android:textColor="#FFFFFF"
-        android:layout_margin="20dp"/>
+        android:layout_height="match_parent"
+        android:background="@color/alert_bkg_color">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:orientation="vertical"
+            android:layout_centerHorizontal="true"
+            android:background="#FFFFFF">
+            <TextView
+                android:id="@+id/dialogTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAlignment="center"
+                android:textSize="18sp"
+                android:textColor="@color/darkTextColor"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginTop="30dp"
+                android:layout_marginBottom="10dp"/>
 
-    <TextView
-        android:id="@+id/dialogContent"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textAlignment="center"
-        android:textSize="18sp"
-        android:textColor="#FFFFFF"
-        android:layout_margin="30dp"/>
+            <TextView
+                android:id="@+id/dialogContent"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAlignment="center"
+                android:textSize="18sp"
+                android:textColor="@color/darkTextColor"
+                android:layout_margin="10dp"/>
 
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_gravity="center"
+                >
+                <Button
+                    android:id="@+id/dialogBtnYes"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/loginControlSize"
+                    android:layout_marginLeft="@dimen/loginViewMarginLeftSize"
+                    android:layout_marginRight="@dimen/loginViewMarginLeftSize"
+                    android:background="@color/login_btn_bk_color"
+                    android:layout_marginTop="30dp"
+                    android:textColor="@color/colorPrimary"
+                    android:text="Yes"/>
+                <Button
+                    android:id="@+id/dialogBtnNo"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/loginControlSize"
+                    android:layout_marginLeft="@dimen/loginViewMarginLeftSize"
+                    android:layout_marginRight="@dimen/loginViewMarginLeftSize"
+                    android:background="@color/login_btn_bk_color"
+                    android:textColor="@color/colorPrimary"
+                    android:text="No"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="30dp"/>
+            </LinearLayout>
+        </LinearLayout>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:gravity="center">
-        <Button
-            android:id="@+id/dialogBtnYes"
-            android:text="Yes"
-            style="@style/Base.Widget.AppCompat.Button.Colored"
+        <ImageView
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_centerHorizontal="true"
+            android:src="@mipmap/ic_logo">
+        </ImageView>
+    </RelativeLayout>
 
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-        <Button
-            android:id="@+id/dialogBtnNo"
-            android:text="No"
-            style="@style/Base.Widget.AppCompat.Button.Colored"
-
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-    </LinearLayout>
 
 </LinearLayout>

@@ -5,7 +5,7 @@
     android:layout_margin="5dp">
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="100dp"
+        android:layout_height="110dp"
         android:orientation="vertical"
         android:weightSum="1">
         <LinearLayout
@@ -30,6 +30,7 @@
                     android:text="MAY"
                     android:textColor="@color/calendar_month_color"
                     android:textSize="@dimen/CalendarMonthDaySize"
+                    android:textStyle="bold"
                     android:textAlignment="center">
                 </TextView>
                 <TextView
@@ -37,6 +38,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="15"
+                    android:textStyle="bold"
                     android:textColor="@color/calendar_day_color"
                     android:textSize="@dimen/CalendarMonthDaySize"
                     android:textAlignment="center">
@@ -57,12 +59,15 @@
                     android:layout_height="wrap_content"
                     android:text="The United Kingdom's four countries take a divided approach to"
                     android:textColor="@color/calendar_day_color"
+                    android:maxLines="3"
+                    android:textStyle="bold"
                     android:textSize="@dimen/CalendarMonthDaySize">
                 </TextView>
                 <TextView
                     android:id="@+id/tv_calendar_time"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:maxLines="1"
                     android:text="06:24 AM - 06:24 AM"
                     android:textColor="@color/calendar_time_color"
                     android:textSize="@dimen/CalendarMonthDaySize">
@@ -104,6 +109,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Moscow, Russa"
+                    android:maxLines="1"
                     android:textColor="@color/whiteTextColor"
                     android:textSize="@dimen/CalendarAddressSize">
                 </TextView>

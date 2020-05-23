@@ -1,16 +1,14 @@
 package com.ciuwapp.activities
-import android.annotation.TargetApi
 import android.content.Intent
-import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import androidx.annotation.RequiresApi
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.ciuwapp.R
 import com.ciuwapp.adapter.CalendarAdapter
 import com.ciuwapp.api.ClientAPIService
 import com.ciuwapp.data.CalendarData
+import com.ciuwapp.listener.OnLoadMoreListener
+import com.ciuwapp.listener.RecyclerViewLoadMoreScroll
 import com.ciuwapp.model.CalendarList
 import com.ciuwapp.prefs.PrefsManager
 import com.kaopiz.kprogresshud.KProgressHUD
@@ -21,8 +19,11 @@ import java.time.format.DateTimeFormatter
 class CalendarActivity : AppCompatActivity() {
 
     private lateinit var hud: KProgressHUD
-    private var currentPage: Int? = 0
+    private var current_Page: Int? = 0
     private var calendarList: ArrayList<CalendarList> = arrayListOf<CalendarList>()
+    private var next_page_url: String? = null
+
+    private var scrollListener: RecyclerViewLoadMoreScroll? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -41,20 +42,17 @@ class CalendarActivity : AppCompatActivity() {
 
     override fun onStart() {
         super.onStart()
-        loadCalendarList()
-    }
-
-    @TargetApi(Build.VERSION_CODES.O)
-    private fun loadCalendarList() {
 
         hud = KProgressHUD.create(this)
+        hud.setBackgroundColor(R.color.colorLoading)
         hud.show()
 
-        ClientAPIService.requestCalendar(PrefsManager.newInstance(this)?.getToken()) { succeeded, result ->
+        ClientAPIService.requestCalendar(PrefsManager.newInstance(this)?.getToken(), 0) { succeeded, result ->
             hud.dismiss()
             if (succeeded) {
                 val msgData: CalendarData? = result
-                currentPage = msgData?.current_page
+                current_Page = msgData?.current_page
+                next_page_url = msgData?.next_page_url
 
                 for (item in msgData?.data!!) {
                     val date = LocalDate.parse(item.date, DateTimeFormatter.ISO_DATE)
@@ -65,7 +63,47 @@ class CalendarActivity : AppCompatActivity() {
                 rv_calendar.setHasFixedSize(true)
                 rv_calendar.adapter = CalendarAdapter(calendarList)
 
-//                rv_message.addOnScrollListener()
+                scrollListener = RecyclerViewLoadMoreScroll(rv_calendar )
+                scrollListener!!.setOnLoadMoreListener(object : OnLoadMoreListener {
+                    override fun onLoadMore() {
+                        loadMoreData()
+                    }
+                })
+
+                rv_calendar!!.addOnScrollListener(scrollListener!!)
+
+                scrollListener!!.setLoaded()
+            }
+            else {
+
+            }
+
+        }
+    }
+
+
+    private fun loadMoreData() {
+        if( next_page_url == null )
+            return
+        hud = KProgressHUD.create(this)
+        hud.setBackgroundColor(R.color.colorLoading)
+        hud.show()
+
+        ClientAPIService.requestCalendar(PrefsManager.newInstance(this)?.getToken(), current_Page!!+1) { succeeded, result ->
+            hud.dismiss()
+            if (succeeded) {
+                val msgData: CalendarData? = result
+                current_Page = msgData?.current_page
+                next_page_url = msgData?.next_page_url
+
+                for (item in msgData?.data!!) {
+                    val date = LocalDate.parse(item.date, DateTimeFormatter.ISO_DATE)
+                    calendarList.add(CalendarList(date.month.toString(), date.dayOfMonth, item.start_time, item.title, item.location))
+                }
+
+                rv_calendar.adapter = CalendarAdapter(calendarList)
+
+                scrollListener!!.setLoaded()
             }
             else {
 

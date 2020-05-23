@@ -30,6 +30,8 @@
                     android:layout_marginBottom="@dimen/HomeMarginBottom"
                     android:layout_alignParentBottom="true"
                     android:text="HOME"
+                    android:textStyle="bold"
+                    android:textSize="@dimen/HomeTextSize"
                     android:textColor="@color/whiteTextColor"
                     android:layout_weight="1"
                     android:textAlignment="center"

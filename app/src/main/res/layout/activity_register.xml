@@ -48,7 +48,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/loginViewMarginLeftSize"
                 android:layout_marginRight="@dimen/loginViewMarginLeftSize"
-                android:textColor="@color/colorPrimary"
+                android:textColor="@color/whiteTextColor"
                 android:textSize="@dimen/loginViewTextSize"
                 android:text="@string/login_email"/>
 
@@ -73,7 +73,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/loginViewMarginLeftSize"
                 android:layout_marginRight="@dimen/loginViewMarginLeftSize"
-                android:textColor="@color/colorPrimary"
+                android:textColor="@color/whiteTextColor"
                 android:textSize="@dimen/loginViewTextSize"
                 android:layout_below="@id/et_email"
                 android:layout_marginTop="@dimen/registerViewMarginTopSize"
@@ -99,7 +99,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/loginViewMarginLeftSize"
                 android:layout_marginRight="@dimen/loginViewMarginLeftSize"
-                android:textColor="@color/colorPrimary"
+                android:textColor="@color/whiteTextColor"
                 android:textSize="@dimen/loginViewTextSize"
                 android:layout_below="@id/et_email"
                 android:layout_marginTop="@dimen/registerViewMarginTopSize"
@@ -125,7 +125,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/loginViewMarginLeftSize"
                 android:layout_marginRight="@dimen/loginViewMarginLeftSize"
-                android:textColor="@color/colorPrimary"
+                android:textColor="@color/whiteTextColor"
                 android:textSize="@dimen/loginViewTextSize"
                 android:layout_below="@id/et_email"
                 android:layout_marginTop="@dimen/registerViewMarginTopSize"
@@ -153,7 +153,7 @@
                 android:layout_marginRight="@dimen/loginViewMarginLeftSize"
                 android:background="@color/login_btn_bk_color"
                 android:layout_marginTop="30dp"
-                android:textColor="@color/colorPrimary"
+                android:textColor="@color/whiteTextColor"
                 android:text="@string/login_btn_register"/>
         </LinearLayout>
     </LinearLayout>

@@ -7,15 +7,30 @@
     <dimen name="loginViewTextSize">16sp</dimen>
     <dimen name="loginControlSize">40dp</dimen>
     <dimen name="registerViewMarginTopSize">5dp</dimen>
-    <dimen name="HomeTextSize">14sp</dimen>
-    <dimen name="HomeMarginLeft">38dp</dimen>
-    <dimen name="HomeMarginRight">38dp</dimen>
+
+
+    <dimen name="HomeTextSize">18sp</dimen>
+    <dimen name="HomeMarginLeft">45dp</dimen>
+    <dimen name="HomeMarginRight">45dp</dimen>
     <dimen name="HomeMarginTop">15dp</dimen>
     <dimen name="HomeMarginBottom">5dp</dimen>
     <dimen name="HomeCardMarginLeft">15dp</dimen>
     <dimen name="HomeCardMarginRight">45dp</dimen>
     <dimen name="HomeCardMarginTop">25dp</dimen>
     <dimen name="HomeCardMarginBottom">20dp</dimen>
-    <dimen name="CalendarMonthDaySize">18sp</dimen>
-    <dimen name="CalendarAddressSize">14sp</dimen>
+
+    <dimen name="CalendarMonthDaySize">16sp</dimen>
+    <dimen name="CalendarAddressSize">16dp</dimen>
+
+
+    <dimen name="cell_margin_top">10dp</dimen>
+    <dimen name="cell_margin_bottom">10dp</dimen>
+    <dimen name="cell_margin_left">50dp</dimen>
+    <dimen name="cell_margin_right">50dp</dimen>
+    <dimen name="cell_header_font_size">20sp</dimen>
+    <dimen name="default_text_size">14sp</dimen>
+    <dimen name="cell_spacing">5dp</dimen>
+
+
+
 </resources>

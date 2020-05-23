@@ -1,7 +1,5 @@
 package com.ciuwapp.data
 
-import java.io.FileDescriptor
-
 data class Calendar (
     var id: Int,
     var title: String,

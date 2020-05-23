@@ -12,11 +12,13 @@ class MessageAdapter (val messageList: ArrayList<MessageList>) : RecyclerView.Ad
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int ): MessageAdapter.CustomViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.list_message_item, parent, false)
+
         return CustomViewHolder(view)
     }
 
     override fun getItemCount(): Int {
-        return messageList.size
+//        return messageList.size
+        return if (messageList == null) 0 else messageList!!.size
     }
 
     override fun onBindViewHolder(holder: MessageAdapter.CustomViewHolder, position: Int) {
@@ -25,7 +27,7 @@ class MessageAdapter (val messageList: ArrayList<MessageList>) : RecyclerView.Ad
         holder.content.text = messageList.get(position).content
     }
 
-    class CustomViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView){
+    open class CustomViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView){
         val month = itemView.findViewById<TextView>(R.id.tv_message_month)
         val day = itemView.findViewById<TextView>(R.id.tv_message_day)
         val content = itemView.findViewById<TextView>(R.id.tv_message_content)

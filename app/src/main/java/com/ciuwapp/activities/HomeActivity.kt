@@ -3,18 +3,16 @@ package com.ciuwapp.activities
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.Window
+import android.view.*
 import com.ciuwapp.R
 import com.ciuwapp.prefs.PrefsManager
 import kotlinx.android.synthetic.main.activity_home.*
-import kotlinx.android.synthetic.main.layout_dialog.view.*
-import androidx.appcompat.app.AlertDialog
 import com.ciuwapp.api.ClientAPIService
-
 class HomeActivity : AppCompatActivity() {
 
     private var webURL : String = ""
+    private var webTitle: String = ""
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -34,60 +32,58 @@ class HomeActivity : AppCompatActivity() {
 
         id_home_benefits.setOnClickListener {
             webURL = "contents/benefits"
+            webTitle = "BENEFITS"
             launchWebViewActivity()
         }
 
         id_home_contract.setOnClickListener {
             webURL = "contents/contract"
+            webTitle = "CONTRACT"
+
             launchWebViewActivity()
         }
 
         id_home_meeting.setOnClickListener {
             webURL = "contents/meeting"
+            webTitle = "MEETING"
             launchWebViewActivity()
         }
 
         id_home_contact.setOnClickListener {
             webURL = "contents/contact"
+            webTitle = "CONTACT"
             launchWebViewActivity()
         }
     }
 
     private fun launchAlertDialog() {
 
-        val mDialogView = LayoutInflater.from(this).inflate(R.layout.layout_dialog, null)
-        //AlertDialogBuilder
-        val mBuilder = AlertDialog.Builder(this)
-            .setView(mDialogView)
-            .setTitle("")
+        var dlg = CustomAlertDialog(this)
 
+        var clickListenerYes = View.OnClickListener { view ->
 
-
-        mDialogView.dialogTitle.setText("Notice")
-        mDialogView.dialogContent.setText("Will you sure logout?")
-
-        //show dialog
-        val mAlertDialog = mBuilder.show()
-
-        //login button click of custom layout
-        mDialogView.dialogBtnYes.setOnClickListener {
-            //dismiss dialog
-            mAlertDialog.dismiss()
-            //get text from EditTexts of custom layout
-            val name = mDialogView.dialogTitle.text.toString()
-            val email = mDialogView.dialogContent.text.toString()
-
+            dlg.dismiss()
             PrefsManager.newInstance(this).logout()
-
             val intent = Intent(this@HomeActivity, LoginActivity::class.java)
             intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
             startActivity(intent)
         }
-        //cancel button click of custom layout
-        mDialogView.dialogBtnNo.setOnClickListener {
-            //dismiss dialog
-            mAlertDialog.dismiss()
+
+        var clickListenerNo = View.OnClickListener {view ->
+            dlg.dismiss()
         }
+
+        dlg.addButton("Yes", clickListenerYes)
+//        dlg.addButton("No", clickListenerNo)
+        dlg.setIcon(R.drawable.ic_question_mark)
+        dlg.setConfirmButtonListener(clickListenerNo)
+        dlg.setConfirmText("No")
+        dlg.confirmButtonColor(R.color.colorPrimary)
+        dlg.setTitleText("Logout?")
+        dlg.setContentText("Press Yes to logout")
+
+        dlg.show()
+
     }
 
     private fun launchCalendarActivity() {
@@ -105,6 +101,7 @@ class HomeActivity : AppCompatActivity() {
     private fun launchWebViewActivity() {
         val intent = Intent(this, WebViewActivity::class.java)
         intent.putExtra("url", "${ClientAPIService.hostURL}${webURL}")
+        intent.putExtra("webTitle", webTitle)
         startActivity(intent)
     }
 

@@ -1,21 +1,21 @@
 package com.ciuwapp.data
 
 data class Message (
-    var id: Int,
-    var date: String,
-    var message: String
+    val id: Int,
+    val date: String,
+    val message: String
 )
 
 data class MessageData(
-    var current_page: Int,
-    var data: ArrayList<Message>?,
-    var first_page_url: String?,
-    var from: Int,
-    var next_page_url: String?,
-    var path: String,
-    var per_page: Int,
-    var prev_page_url: String?,
-    var to: Int
+    val current_page: Int,
+    val data: ArrayList<Message>?,
+    val first_page_url: String?,
+    val from: Int,
+    val next_page_url: String?,
+    val path: String,
+    val per_page: Int,
+    val prev_page_url: String?,
+    val to: Int
 )
 data class MessageResponse(
     val messages: MessageData

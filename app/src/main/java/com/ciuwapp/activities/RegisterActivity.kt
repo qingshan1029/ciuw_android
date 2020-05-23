@@ -1,6 +1,5 @@
 package com.ciuwapp.activities
 
-import android.content.Intent
 import com.ciuwapp.R
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -39,23 +38,29 @@ class RegisterActivity : AppCompatActivity() {
         var lastname = et_last_name.text.toString()
 
         if(!AppHelper.isEmailValid(email)){
-            et_email.error = "Enter the valid email."
+            //et_email.error = "Enter the valid email."
+            this.launchAlertDialog("Enter the valid email.")
             return
         }
         if( password?.length < 6) {
-            et_password.error = "Password should be 6 in length at least."
+//            et_password.error = "Password should be 6 in length at least."
+            this.launchAlertDialog("Password should be 6 in length at least.")
             return
         }
         if(firstname?.isEmpty()){
-            et_first_name.error = "Enter your first name."
+//            et_first_name.error = "Enter your first name."
+            this.launchAlertDialog("Enter your first name.")
             return
         }
         if(lastname?.isEmpty()){
-            et_last_name.error = "Enter your last name."
+//            et_last_name.error = "Enter your last name."
+            this.launchAlertDialog("Enter your last name.")
             return
         }
 
+
         hud = KProgressHUD.create(this)
+        hud.setBackgroundColor(R.color.colorLoading)
         hud.show()
 
         ClientAPIService.requestRegister(email, password, password, firstname, lastname) { succeeded, result ->
@@ -99,5 +104,25 @@ class RegisterActivity : AppCompatActivity() {
 
     private fun launchLoginActivity() {
         finish()
+    }
+
+    private fun launchAlertDialog(text: String) {
+
+        var dlg = CustomAlertDialog(this)
+
+
+        var clickListenerOk = View.OnClickListener {view ->
+            dlg.dismiss()
+        }
+
+        dlg.setIcon(R.drawable.ic_close_black_24dp)
+        dlg.setConfirmButtonListener(clickListenerOk)
+        dlg.setConfirmText("OK")
+        dlg.confirmButtonColor(R.color.colorPrimary)
+        dlg.setTitleText("CIUW")
+        dlg.setContentText(text)
+
+        dlg.show()
+
     }
 }

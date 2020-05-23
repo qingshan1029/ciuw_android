@@ -26,6 +26,7 @@
                     android:text="MAY"
                     android:textColor="@color/calendar_month_color"
                     android:textSize="@dimen/CalendarMonthDaySize"
+                    android:textStyle="bold"
                     android:textAlignment="center">
                 </TextView>
                 <TextView
@@ -33,6 +34,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="15"
+                    android:textStyle="bold"
                     android:textColor="@color/calendar_day_color"
                     android:textSize="@dimen/CalendarMonthDaySize"
                     android:textAlignment="center">
@@ -52,6 +54,8 @@
                     android:id="@+id/tv_message_content"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:maxLines="3"
+                    android:textStyle="bold"
                     android:text="Example mesage text..."
                     android:textColor="@color/calendar_day_color"
                     android:textSize="@dimen/CalendarMonthDaySize">
@@ -59,4 +63,4 @@
             </LinearLayout>
         </LinearLayout>
 
-    </LinearLayout>
+</LinearLayout>

@@ -6,12 +6,23 @@ import android.webkit.WebChromeClient
 import android.webkit.WebViewClient
 import com.ciuwapp.R
 import kotlinx.android.synthetic.main.activity_web_view.*
+import androidx.appcompat.widget.Toolbar
 
 class WebViewActivity : AppCompatActivity() {
+    private lateinit var toolbar: Toolbar
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_web_view)
+
+        toolbar = findViewById(R.id.toolbar)
+        setSupportActionBar(toolbar)
+
+        // action bar
+        val actionbar = supportActionBar
+        actionbar!!.title = intent.getStringExtra("webTitle")
+        actionbar.setDisplayHomeAsUpEnabled(true)
+
 
         val url = intent.getStringExtra("url")
 
@@ -29,5 +40,9 @@ class WebViewActivity : AppCompatActivity() {
             super.onBackPressed()
         }
 
+    }
+    override fun onSupportNavigateUp(): Boolean {
+        onBackPressed()
+        return true
     }
 }

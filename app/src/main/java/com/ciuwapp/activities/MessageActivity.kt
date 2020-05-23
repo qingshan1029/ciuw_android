@@ -1,17 +1,17 @@
 package com.ciuwapp.activities
 
-import android.annotation.TargetApi
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import kotlinx.android.synthetic.main.activity_message.*
 
 import android.content.Intent
-import android.os.Build
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.ciuwapp.R
 import com.ciuwapp.adapter.MessageAdapter
 import com.ciuwapp.api.ClientAPIService
 import com.ciuwapp.data.*
+import com.ciuwapp.listener.OnLoadMoreListener
+import com.ciuwapp.listener.RecyclerViewLoadMoreScroll
 import com.ciuwapp.model.MessageList
 import com.ciuwapp.prefs.PrefsManager
 import com.kaopiz.kprogresshud.KProgressHUD
@@ -21,8 +21,11 @@ import kotlin.collections.ArrayList
 
 class MessageActivity : AppCompatActivity() {
     private lateinit var hud: KProgressHUD
-    private var currentPage: Int? = 0
-    private var messageList: ArrayList<MessageList> = arrayListOf<MessageList>()
+    private var current_Page: Int? = 0
+    private val messageList: ArrayList<MessageList> = arrayListOf<MessageList>()
+    private var next_page_url: String? = null
+
+    private var scrollListener: RecyclerViewLoadMoreScroll? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -35,25 +38,17 @@ class MessageActivity : AppCompatActivity() {
 
     override fun onStart() {
         super.onStart()
-        loadMessageList()
-    }
-    private fun launchHomeActivity() {
-        val intent = Intent(this, HomeActivity::class.java)
-        startActivity(intent)
-        finish()
-    }
-
-    @TargetApi(Build.VERSION_CODES.O)
-    private fun loadMessageList() {
 
         hud = KProgressHUD.create(this)
+        hud.setBackgroundColor(R.color.colorLoading)
         hud.show()
 
-        ClientAPIService.requestMessage(PrefsManager.newInstance(this)?.getToken()) { succeeded, result ->
+        ClientAPIService.requestMessage(PrefsManager.newInstance(this)?.getToken(), 0) { succeeded, result ->
             hud.dismiss()
             if (succeeded) {
                 val msgData: MessageData? = result
-                currentPage = msgData?.current_page
+                current_Page = msgData?.current_page
+                next_page_url = msgData?.next_page_url
 
                 for (item in msgData?.data!!) {
                     val date = LocalDate.parse(item.date, DateTimeFormatter.ISO_DATE)
@@ -63,7 +58,17 @@ class MessageActivity : AppCompatActivity() {
                 rv_message.layoutManager =  LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
                 rv_message.setHasFixedSize(true)
                 rv_message.adapter = MessageAdapter(messageList)
-//                rv_message.addOnScrollListener()
+
+                scrollListener = RecyclerViewLoadMoreScroll(rv_message )
+                scrollListener!!.setOnLoadMoreListener(object : OnLoadMoreListener {
+                    override fun onLoadMore() {
+                        loadMoreData()
+                    }
+                })
+
+                rv_message!!.addOnScrollListener(scrollListener!!)
+
+                scrollListener!!.setLoaded()
             }
             else {
 
@@ -71,4 +76,38 @@ class MessageActivity : AppCompatActivity() {
         }
     }
 
+    private fun launchHomeActivity() {
+        val intent = Intent(this, HomeActivity::class.java)
+        startActivity(intent)
+        finish()
+    }
+
+    private fun loadMoreData() {
+        if( next_page_url == null )
+            return
+
+        hud = KProgressHUD.create(this)
+        hud.setBackgroundColor(R.color.colorLoading)
+        hud.show()
+
+        ClientAPIService.requestMessage(PrefsManager.newInstance(this)?.getToken(), current_Page!!+1 ) { succeeded, result ->
+            hud.dismiss()
+            if (succeeded) {
+                val msgData: MessageData? = result
+                current_Page = msgData?.current_page
+                next_page_url = msgData?.next_page_url
+
+                for (item in msgData?.data!!) {
+                    val date = LocalDate.parse(item.date, DateTimeFormatter.ISO_DATE)
+                    messageList.add(MessageList(date.month.toString(), date.dayOfMonth, item.message))
+                }
+
+                rv_message.adapter = MessageAdapter(messageList)
+            }
+            else {
+
+            }
+            scrollListener!!.setLoaded()
+        }
+    }
 }

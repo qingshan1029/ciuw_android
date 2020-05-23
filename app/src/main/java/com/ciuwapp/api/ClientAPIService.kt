@@ -7,14 +7,13 @@ import retrofit2.Callback
 import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.http.*
-import com.ciuwapp.prefs.PrefsManager
 import retrofit2.converter.gson.GsonConverterFactory
 
 class ClientAPIService {
     companion object {
-        var hostURL = "https://dev5.pinpointdigital.com/"
-        var baseURL = "https://dev5.pinpointdigital.com/api/"
-        var client: ClientLoginAPIClient = ClientLoginAPIClient.create()
+        val hostURL = "https://dev5.pinpointdigital.com/"
+        val baseURL = "https://dev5.pinpointdigital.com/api/"
+        val client: ClientLoginAPIClient = ClientLoginAPIClient.create()
 
         fun requestLogin(
             email: String, password: String, callback: (succeeded: Boolean, result: UserData?) -> Unit
@@ -66,9 +65,9 @@ class ClientAPIService {
         }
 
         fun requestMessage(
-            token: String, callback: (succeeded: Boolean, result: MessageData?) -> Unit
+            token: String, pageNO: Int, callback: (succeeded: Boolean, result: MessageData?) -> Unit
         ) {
-            client.requestMessage("Bearer $token").enqueue(object: Callback<MessageResponse>{
+            client.requestMessage("Bearer $token", pageNO).enqueue(object: Callback<MessageResponse>{
 
                 override fun onFailure(call: Call<MessageResponse>, t: Throwable) {
                     Log.d(
@@ -90,9 +89,9 @@ class ClientAPIService {
             })
         }
         fun requestCalendar(
-            token: String, callback: (succeeded: Boolean, result: CalendarData?) -> Unit
+            token: String, pageNO: Int,callback: (succeeded: Boolean, result: CalendarData?) -> Unit
         ) {
-            client.requestCalendar("Bearer $token").enqueue(object: Callback<CalendarResponse>{
+            client.requestCalendar("Bearer $token", pageNO).enqueue(object: Callback<CalendarResponse>{
 
                 override fun onFailure(call: Call<CalendarResponse>, t: Throwable) {
                     Log.d(
@@ -135,20 +134,24 @@ interface ClientLoginAPIClient{
         @Field("lastname") last_name:String
         ) : Call<UserData>
 
-    //@GET("api/Profiles/GetProfile?id={id}")
+    @POST("messages")
+    fun requestMessage(
+        @Header("Authorization") token: String,
+        @Query("page") pageNO: Int
+    ): Call<MessageResponse>
 
-    @POST("messages?page=1")
-    fun requestMessage(@Header("Authorization") token: String): Call<MessageResponse>
 
-
-    @POST("events?page=1")
-    fun requestCalendar(@Header("Authorization") token: String): Call<CalendarResponse>
+    @POST("events")
+    fun requestCalendar(
+        @Header("Authorization") token: String,
+        @Query("page") pageNO: Int
+        ): Call<CalendarResponse>
 
 
     companion object Factory {
         fun create(): ClientLoginAPIClient {
             Log.d("Client Portal Service", "Create Factory")
-            var retrofit = Retrofit.Builder()
+            val retrofit = Retrofit.Builder()
                 .baseUrl(ClientAPIService.baseURL)
                 .addConverterFactory(GsonConverterFactory.create())
                 .build()

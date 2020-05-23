@@ -6,7 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
 import android.view.View
-import android.widget.ImageView
+import android.widget.Toast
 
 import com.ciuwapp.R
 import com.ciuwapp.api.ClientAPIService
@@ -27,7 +27,7 @@ class LoginActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
 
-        et_email.setText("test@dev.com")
+        et_email.setText("test1@test1.com")
         et_password.setText("123456")
 
         btn_login.setOnClickListener {
@@ -37,17 +37,29 @@ class LoginActivity : AppCompatActivity() {
         btn_register.setOnClickListener {
             launchRegisterActivity()
         }
+
+        tv_pw_forgot.setOnClickListener {
+            launchForgotPassword()
+        }
     }
 
     private fun checkLogin() {
         var email = et_email.text.toString()
         var password = et_password.text.toString()
 
+
         if(!AppHelper.isEmailValid(email)){
-            et_email.error = "Enter the valid email."
+            this.launchAlertDialog("Enter the valid email.")
             return
         }
+
+        if( password.isEmpty() ) {
+            this.launchAlertDialog("Enter your password.")
+            return
+        }
+
         hud = KProgressHUD.create(this)
+        hud.setBackgroundColor(R.color.colorLoading)
         hud.show()
 
         ClientAPIService.requestLogin(email, password) { succeeded, result ->
@@ -57,20 +69,19 @@ class LoginActivity : AppCompatActivity() {
                 if(userData?.token != null) {
                     AppHelper.userProfile = userData.user
 
-                    loginWrapper.visibility = View.GONE
-                    val imageView = ImageView(this)
-                    imageView.setBackgroundResource(R.mipmap.ic_checkmark)
-                    PrefsManager.newInstance(this)?.setEmail(email)
-                    PrefsManager.newInstance(this)?.setPassword(password)
-                    PrefsManager.newInstance(this)?.setToken(userData?.token)
-
-                    hud.setCustomView(imageView)
-                        .setLabel("Login Successful")
+                    hud.setLabel("Login Successful")
                         .show()
                     Handler().postDelayed({
                         hud.dismiss()
                         launchHomeActivity()
                     }, 2000)
+
+
+                    PrefsManager.newInstance(this)?.setEmail(email)
+                    PrefsManager.newInstance(this)?.setPassword(password)
+                    PrefsManager.newInstance(this)?.setToken(userData?.token)
+
+
                 }
                 else{
                     hud.setLabel("Failed to login")
@@ -100,5 +111,26 @@ class LoginActivity : AppCompatActivity() {
 //        intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
         startActivity(intent)
     }
+    private fun launchAlertDialog(text: String) {
 
+        var dlg = CustomAlertDialog(this)
+
+
+        var clickListenerOk = View.OnClickListener {view ->
+            dlg.dismiss()
+        }
+
+        dlg.setIcon(R.drawable.ic_close_black_24dp)
+        dlg.setConfirmButtonListener(clickListenerOk)
+        dlg.setConfirmText("OK")
+        dlg.confirmButtonColor(R.color.colorPrimary)
+        dlg.setTitleText("CIUW")
+        dlg.setContentText(text)
+
+        dlg.show()
+
+    }
+    private fun launchForgotPassword() {
+        Toast.makeText(this, "Pressed forgot your password.", Toast.LENGTH_SHORT).show()
+    }
 }

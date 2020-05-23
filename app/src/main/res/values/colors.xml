@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#FFFFFF</color>
-    <color name="colorPrimaryDark">#000</color>
-    <color name="colorAccent">#11CFC5</color>
+    <color name="colorPrimary">#CA2F37</color>
+    <color name="colorPrimaryDark">#CA2F37</color>
+    <color name="colorAccent">#CA2F37</color>
+    <color name="colorPrimaryWhite">#FFFFFF</color>
     <color name="themeColor">#11CFC5</color>
 
     <!--normal colors-->
@@ -23,4 +24,13 @@
     <color name="calendar_day_color">#BD0800</color>
     <color name="calendar_time_color">#727272</color>
     <color name="calendar_month_bkg_color">#E2E2E2</color>
+
+    <color name="alert_bkg_color">#57FFB1B1</color>
+    <color name="warningColor">#DB0000</color>
+    <color name="lighterBackgroundColor">#FFADAD</color>
+    <color name="colorLargeGrey">#616161</color>
+
+    <color name="noticeColor">#005A19</color>
+
+    <color name="colorLoading">#03A9F4</color>
 </resources>
