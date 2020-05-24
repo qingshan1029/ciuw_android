@@ -31,7 +31,7 @@ class LoginActivity : AppCompatActivity() {
         et_password.setText("123456")
 
         btn_login.setOnClickListener {
-            checkLogin()
+            launchLogin()
         }
 
         btn_register.setOnClickListener {
@@ -43,7 +43,7 @@ class LoginActivity : AppCompatActivity() {
         }
     }
 
-    private fun checkLogin() {
+    private fun launchLogin() {
         var email = et_email.text.toString()
         var password = et_password.text.toString()
 
@@ -64,10 +64,14 @@ class LoginActivity : AppCompatActivity() {
 
         ClientAPIService.requestLogin(email, password) { succeeded, result ->
             hud.dismiss()
-            if (succeeded) {
+            if (succeeded == 200) {
                 val userData: UserData? = result
                 if(userData?.token != null) {
                     AppHelper.userProfile = userData.user
+
+                    PrefsManager.newInstance(this).setEmail(email)
+                    PrefsManager.newInstance(this).setPassword(password)
+                    PrefsManager.newInstance(this).setToken(userData.token)
 
                     hud.setLabel("Login Successful")
                         .show()
@@ -75,21 +79,27 @@ class LoginActivity : AppCompatActivity() {
                         hud.dismiss()
                         launchHomeActivity()
                     }, 2000)
-
-
-                    PrefsManager.newInstance(this)?.setEmail(email)
-                    PrefsManager.newInstance(this)?.setPassword(password)
-                    PrefsManager.newInstance(this)?.setToken(userData?.token)
-
-
                 }
                 else{
-                    hud.setLabel("Failed to login")
+                    hud.setLabel("token is null")
                         .show()
                     Handler().postDelayed({
                         hud.dismiss()
                     }, 2000)
                 }
+            } else if (succeeded == 401) {// error: Your are not approved yet
+                hud.setLabel("Your are not approved yet.")
+                    .show()
+                Handler().postDelayed({
+                    hud.dismiss()
+                }, 2000)
+            }
+            else if( succeeded == 400 ) {  // error: invalid user name or password
+                hud.setLabel("Invalid user name or password.")
+                    .show()
+                Handler().postDelayed({
+                    hud.dismiss()
+                }, 2000)
             }
             else {
                 hud.setLabel("Failed to login")
@@ -116,7 +126,7 @@ class LoginActivity : AppCompatActivity() {
         var dlg = CustomAlertDialog(this)
 
 
-        var clickListenerOk = View.OnClickListener {view ->
+        var clickListenerOk = View.OnClickListener {
             dlg.dismiss()
         }
 
@@ -131,6 +141,7 @@ class LoginActivity : AppCompatActivity() {
 
     }
     private fun launchForgotPassword() {
-        Toast.makeText(this, "Pressed forgot your password.", Toast.LENGTH_SHORT).show()
+        val intent = Intent(this@LoginActivity, ForgotPasswordActivity::class.java)
+        startActivity(intent)
     }
 }

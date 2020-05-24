@@ -31,7 +31,7 @@
                     android:layout_alignParentBottom="true"
                     android:textStyle="bold"
                     android:text="MESSAGE"
-                    android:textSize="@dimen/HomeTextSize"
+                    android:textSize="@dimen/HomeTitleSize"
                     android:textColor="@color/whiteTextColor"
                     android:layout_weight="1"
                     android:textAlignment="center"

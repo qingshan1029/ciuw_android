@@ -33,4 +33,7 @@
     <color name="noticeColor">#005A19</color>
 
     <color name="colorLoading">#03A9F4</color>
+
+    <color name="colorVerifyTilte">#6200EE</color>
+    <color name="colorVerifyButton">#2591FF</color>
 </resources>

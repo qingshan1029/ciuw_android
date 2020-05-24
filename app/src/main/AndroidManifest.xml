@@ -12,7 +12,9 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme.NoActionBar"
         android:usesCleartextTraffic="true">
-        <activity android:name=".activities.WebViewActivity"></activity>
+        <activity android:name=".activities.VerifyCodeActivity"></activity>
+        <activity android:name=".activities.ForgotPasswordActivity" />
+        <activity android:name=".activities.WebViewActivity" />
         <activity
             android:name=".activities.SplashActivity"
             android:screenOrientation="portrait">

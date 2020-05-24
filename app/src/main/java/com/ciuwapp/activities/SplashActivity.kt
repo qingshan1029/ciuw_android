@@ -28,7 +28,7 @@ class SplashActivity : AppCompatActivity() {
             }, 2000)
         } else {
             ClientAPIService.requestLogin(email!!, password!!) { succeeded, result ->
-                if (succeeded) {
+                if (succeeded == 200) {
                     val userData: UserData? = result
                     if (userData?.token != null) {
                         AppHelper.userProfile = userData.user

@@ -7,15 +7,19 @@
     <dimen name="loginViewTextSize">16sp</dimen>
     <dimen name="loginControlSize">40dp</dimen>
     <dimen name="registerViewMarginTopSize">5dp</dimen>
+    <dimen name="ForgotPasswordTextSize">20sp</dimen>
+    <dimen name="ForgotPasswordMarginTop">15dp</dimen>
+    <dimen name="ForgotPasswordMarginBottom">10dp</dimen>
 
 
-    <dimen name="HomeTextSize">18sp</dimen>
-    <dimen name="HomeMarginLeft">45dp</dimen>
-    <dimen name="HomeMarginRight">45dp</dimen>
+    <dimen name="HomeTitleSize">18sp</dimen>
+    <dimen name="HomeTextSize">14sp</dimen>
+    <dimen name="HomeMarginLeft">40dp</dimen>
+    <dimen name="HomeMarginRight">40dp</dimen>
     <dimen name="HomeMarginTop">15dp</dimen>
-    <dimen name="HomeMarginBottom">5dp</dimen>
-    <dimen name="HomeCardMarginLeft">15dp</dimen>
-    <dimen name="HomeCardMarginRight">45dp</dimen>
+    <dimen name="HomeMarginBottom">10dp</dimen>
+    <dimen name="HomeCardMarginLeft">25dp</dimen>
+    <dimen name="HomeCardMarginRight">55dp</dimen>
     <dimen name="HomeCardMarginTop">25dp</dimen>
     <dimen name="HomeCardMarginBottom">20dp</dimen>
 

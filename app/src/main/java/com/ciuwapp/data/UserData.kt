@@ -12,7 +12,11 @@ data class UserProfile (
     var created_at: String
 )
 
-data class UserData(
+data class UserData (
     var token: String,
     var user: UserProfile
+)
+
+data class ErrorData (
+    var error: String
 )

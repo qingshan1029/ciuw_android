@@ -16,7 +16,7 @@ class ClientAPIService {
         val client: ClientLoginAPIClient = ClientLoginAPIClient.create()
 
         fun requestLogin(
-            email: String, password: String, callback: (succeeded: Boolean, result: UserData?) -> Unit
+            email: String, password: String, callback: (succeeded: Int, result: UserData?) -> Unit
         ) {
             client.requestLogin(email,password).enqueue(object: Callback<UserData>{
 
@@ -25,16 +25,20 @@ class ClientAPIService {
                         "ClientAPIService",
                         "Could not get network status ${t.localizedMessage}"
                     )
-                    callback(false, null)
+                    callback(-1, null)
                 }
                 override fun onResponse(call: Call<UserData>, response: Response<UserData>) {
                     Log.d("ClientAPIService", "Got the user back ${response.body()}")
                     val code = response.code()
-                    if (response.body() != null) {
+                    if (code == 200 && response.body() != null) {
                         var postResponse = response.body()!!
-                        callback(true, postResponse)
-                    } else {
-                        callback(false, null)
+                        callback(code, postResponse)
+                    } else if( code == 400 ) {
+                        callback(code, null)
+                    } else if( code == 401 ) {
+                        callback(code, null)
+                    } else if( code == 200 ) {  // Ok but body is null
+                        callback(402, null)
                     }
                 }
             })
@@ -60,6 +64,44 @@ class ClientAPIService {
                     } else {
                         callback(false, null)
                     }
+                }
+            })
+        }
+
+        fun requestForgotPassword(
+            email: String, password: String, callback: (succeeded: Int, result: UserData?) -> Unit
+        ) {
+            client.requestForgotPassword(email,password).enqueue(object: Callback<UserData>{
+
+                override fun onFailure(call: Call<UserData>, t: Throwable) {
+                    Log.d(
+                        "ClientAPIService",
+                        "Error forgot password ${t.localizedMessage}"
+                    )
+                    callback(-1, null)
+                }
+                override fun onResponse(call: Call<UserData>, response: Response<UserData>) {
+                    Log.d("ClientAPIService", "Got feedback about sending your email")
+                     callback(response.code(), null)
+                }
+            })
+        }
+
+        fun requestResetPassword(
+            email: String, verify_code: String, callback: (succeeded: Int, result: UserData?) -> Unit
+        ) {
+            client.requestResetPassword(email,verify_code).enqueue(object: Callback<UserData>{
+
+                override fun onFailure(call: Call<UserData>, t: Throwable) {
+                    Log.d(
+                        "ClientAPIService",
+                        "Error verify code"
+                    )
+                    callback(-1, null)
+                }
+                override fun onResponse(call: Call<UserData>, response: Response<UserData>) {
+                    Log.d("ClientAPIService", "Got feedback about sending verify code")
+                    callback(response.code(), null)
                 }
             })
         }
@@ -133,6 +175,20 @@ interface ClientLoginAPIClient{
         @Field("firstname") first_name:String,
         @Field("lastname") last_name:String
         ) : Call<UserData>
+
+    @POST("forgotpassword")
+    @FormUrlEncoded
+    fun requestForgotPassword(
+        @Field("email") email:String,
+        @Field("password") password:String
+    ) : Call<UserData>
+
+    @POST("resetpassword")
+    @FormUrlEncoded
+    fun requestResetPassword(
+        @Field("email") email:String,
+        @Field("verify_code") verify_code:String
+    ) : Call<UserData>
 
     @POST("messages")
     fun requestMessage(

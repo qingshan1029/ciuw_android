@@ -37,7 +37,7 @@ class RegisterActivity : AppCompatActivity() {
         var firstname = et_first_name.text.toString()
         var lastname = et_last_name.text.toString()
 
-        if(!AppHelper.isEmailValid(email)){
+        if(!AppHelper.isEmailValid(email)) {
             //et_email.error = "Enter the valid email."
             this.launchAlertDialog("Enter the valid email.")
             return
@@ -70,14 +70,10 @@ class RegisterActivity : AppCompatActivity() {
                 if(userData?.token != null) {
                     AppHelper.userProfile = userData.user
 
-                    registerWrapper.visibility = View.GONE
-                    val imageView = ImageView(this)
-                    imageView.setBackgroundResource(R.mipmap.ic_checkmark)
                     PrefsManager.newInstance(this)?.setEmail(email)
                     PrefsManager.newInstance(this)?.setPassword(password)
 
-                    hud.setCustomView(imageView)
-                        .setLabel("Register Successful")
+                    hud.setLabel("Register Successful")
                         .show()
                     Handler().postDelayed({
                         hud.dismiss()

@@ -31,7 +31,7 @@
                     android:layout_alignParentBottom="true"
                     android:text="HOME"
                     android:textStyle="bold"
-                    android:textSize="@dimen/HomeTextSize"
+                    android:textSize="@dimen/HomeTitleSize"
                     android:textColor="@color/whiteTextColor"
                     android:layout_weight="1"
                     android:textAlignment="center"
@@ -95,7 +95,7 @@
                         android:layout_marginRight="@dimen/HomeCardMarginLeft"
                         android:layout_marginTop="@dimen/HomeCardMarginTop"
                         android:layout_marginBottom="@dimen/HomeCardMarginBottom"
-                        android:background="@drawable/et_style"
+                        android:background="@drawable/card_style"
                         android:orientation="vertical"
                         android:weightSum="10">
                             <ImageView
@@ -114,8 +114,8 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginBottom="@dimen/HomeMarginBottom"
                                 android:text="CALENDAR"
+                                android:textSize="@dimen/HomeTextSize"
                                 android:textColor="@color/home_text_color"
-                                android:layout_weight="1"
                                 android:textAlignment="center"
                                 >
                             </TextView>
@@ -135,7 +135,7 @@
                         android:layout_marginRight="@dimen/HomeCardMarginRight"
                         android:layout_marginTop="@dimen/HomeCardMarginTop"
                         android:layout_marginBottom="@dimen/HomeCardMarginBottom"
-                        android:background="@drawable/et_style"
+                        android:background="@drawable/card_style"
                         android:orientation="vertical"
                         android:weightSum="10">
                         <ImageView
@@ -154,8 +154,8 @@
                             android:layout_height="wrap_content"
                             android:layout_marginBottom="@dimen/HomeMarginBottom"
                             android:text="MESSAGE"
+                            android:textSize="@dimen/HomeTextSize"
                             android:textColor="@color/home_text_color"
-                            android:layout_weight="1"
                             android:textAlignment="center"
                             >
                         </TextView>
@@ -182,7 +182,7 @@
                     android:layout_marginRight="@dimen/HomeCardMarginLeft"
                     android:layout_marginTop="@dimen/HomeCardMarginTop"
                     android:layout_marginBottom="@dimen/HomeCardMarginBottom"
-                    android:background="@drawable/et_style"
+                    android:background="@drawable/card_style"
                     android:orientation="vertical"
                     android:weightSum="10">
                     <ImageView
@@ -201,8 +201,8 @@
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="@dimen/HomeMarginBottom"
                         android:text="BENEFITS"
+                        android:textSize="@dimen/HomeTextSize"
                         android:textColor="@color/home_text_color"
-                        android:layout_weight="1"
                         android:textAlignment="center"
                         >
                     </TextView>
@@ -222,7 +222,7 @@
                     android:layout_marginRight="@dimen/HomeCardMarginRight"
                     android:layout_marginTop="@dimen/HomeCardMarginTop"
                     android:layout_marginBottom="@dimen/HomeCardMarginBottom"
-                    android:background="@drawable/et_style"
+                    android:background="@drawable/card_style"
                     android:orientation="vertical"
                     android:weightSum="10">
                     <ImageView
@@ -241,8 +241,8 @@
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="@dimen/HomeMarginBottom"
                         android:text="CONTRACT"
+                        android:textSize="@dimen/HomeTextSize"
                         android:textColor="@color/home_text_color"
-                        android:layout_weight="1"
                         android:textAlignment="center"
                         >
                     </TextView>
@@ -270,7 +270,7 @@
                         android:layout_marginRight="@dimen/HomeCardMarginLeft"
                         android:layout_marginTop="@dimen/HomeCardMarginTop"
                         android:layout_marginBottom="@dimen/HomeCardMarginBottom"
-                        android:background="@drawable/et_style"
+                        android:background="@drawable/card_style"
                         android:orientation="vertical"
                         android:weightSum="10">
                         <ImageView
@@ -289,8 +289,8 @@
                             android:layout_height="wrap_content"
                             android:layout_marginBottom="@dimen/HomeMarginBottom"
                             android:text="MEETING"
+                            android:textSize="@dimen/HomeTextSize"
                             android:textColor="@color/home_text_color"
-                            android:layout_weight="1"
                             android:textAlignment="center"
                             >
                         </TextView>
@@ -310,7 +310,7 @@
                         android:layout_marginRight="@dimen/HomeCardMarginRight"
                         android:layout_marginTop="@dimen/HomeCardMarginTop"
                         android:layout_marginBottom="@dimen/HomeCardMarginBottom"
-                        android:background="@drawable/et_style"
+                        android:background="@drawable/card_style"
                         android:orientation="vertical"
                         android:weightSum="10">
                         <ImageView
@@ -329,8 +329,8 @@
                             android:layout_height="wrap_content"
                             android:layout_marginBottom="@dimen/HomeMarginBottom"
                             android:text="CONTACT"
+                            android:textSize="@dimen/HomeTextSize"
                             android:textColor="@color/home_text_color"
-                            android:layout_weight="1"
                             android:textAlignment="center"
                             >
                         </TextView>
