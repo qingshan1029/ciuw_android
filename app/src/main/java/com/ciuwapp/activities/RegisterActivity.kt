@@ -32,27 +32,33 @@ class RegisterActivity : AppCompatActivity() {
     }
 
     private fun createNewAccount() {
-        var email = et_email.text.toString()
-        var password = et_password.text.toString()
-        var firstname = et_first_name.text.toString()
-        var lastname = et_last_name.text.toString()
+        val email = et_email.text.toString()
+        val password = et_password.text.toString()
+        val firstname = et_first_name.text.toString()
+        val lastname = et_last_name.text.toString()
+
+        if( email.isEmpty() ) {
+            this.launchAlertDialog("Enter your email.")
+            return
+        }
 
         if(!AppHelper.isEmailValid(email)) {
             //et_email.error = "Enter the valid email."
             this.launchAlertDialog("Enter the valid email.")
             return
         }
-        if( password?.length < 6) {
+
+        if( password.length < 6) {
 //            et_password.error = "Password should be 6 in length at least."
             this.launchAlertDialog("Password should be 6 in length at least.")
             return
         }
-        if(firstname?.isEmpty()){
+        if(firstname.isEmpty()){
 //            et_first_name.error = "Enter your first name."
             this.launchAlertDialog("Enter your first name.")
             return
         }
-        if(lastname?.isEmpty()){
+        if(lastname.isEmpty()){
 //            et_last_name.error = "Enter your last name."
             this.launchAlertDialog("Enter your last name.")
             return
@@ -61,35 +67,26 @@ class RegisterActivity : AppCompatActivity() {
 
         hud = KProgressHUD.create(this)
         hud.setBackgroundColor(R.color.colorLoading)
+        hud.setLabel("Registering...")
         hud.show()
 
         ClientAPIService.requestRegister(email, password, password, firstname, lastname) { succeeded, result ->
             hud.dismiss()
-            if (succeeded) {
-                val userData: UserData? = result
-                if(userData?.token != null) {
-                    AppHelper.userProfile = userData.user
-
-                    PrefsManager.newInstance(this)?.setEmail(email)
-                    PrefsManager.newInstance(this)?.setPassword(password)
-
-                    hud.setLabel("Register Successful")
-                        .show()
-                    Handler().postDelayed({
-                        hud.dismiss()
-                        launchLoginActivity()
-                    }, 2000)
-                }
-                else{
-                    hud.setLabel("Failed to register")
-                        .show()
-                    Handler().postDelayed({
-                        hud.dismiss()
-                    }, 2000)
-                }
-            }
-            else {
-                hud.setLabel("Failed to register")
+            if (succeeded == 201) {
+                hud.setLabel("Registration successful.")
+                    .show()
+                Handler().postDelayed({
+                    hud.dismiss()
+                    launchLoginActivity()
+                }, 2000)
+            } else if( succeeded == 400 ) {  // error: Existing email or password is not matched
+                hud.setLabel("Existing email.")
+                    .show()
+                Handler().postDelayed({
+                    hud.dismiss()
+                }, 2000)
+            } else {
+                hud.setLabel("Failed to register.")
                     .show()
                 Handler().postDelayed({
                     hud.dismiss()
@@ -107,7 +104,7 @@ class RegisterActivity : AppCompatActivity() {
         var dlg = CustomAlertDialog(this)
 
 
-        var clickListenerOk = View.OnClickListener {view ->
+        var clickListenerOk = View.OnClickListener {
             dlg.dismiss()
         }
 

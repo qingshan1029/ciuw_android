@@ -10,4 +10,22 @@
     <string name="btn_reset_password">RESET PASSWORD</string>
     <string name="login_first_name">First Name</string>
     <string name="login_last_name">Last Name</string>
+
+    <string name="forgot_password">Forgot Password?</string>
+    <string name="reset_password">Reset Password</string>
+    <string name="new_password">New Password</string>
+    <string name="reset_password_upper">RESET PASSWORD</string>
+
+
+    <string name="calendar">CALENDAR</string>
+    <string name="message">MESSAGE</string>
+    <string name="benefits">BENEFITS</string>
+    <string name="contract">CONTRACT</string>
+    <string name="meeting">MEETING</string>
+    <string name="contact">CONTACT</string>
+
+
+    <string name="verify_title">Verification code is sent to your email.</string>
+
+
 </resources>

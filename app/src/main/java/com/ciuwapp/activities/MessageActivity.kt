@@ -6,6 +6,7 @@ import kotlinx.android.synthetic.main.activity_message.*
 
 import android.content.Intent
 import android.util.Log
+import android.view.View
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.ciuwapp.R
@@ -15,13 +16,12 @@ import com.ciuwapp.data.*
 import com.ciuwapp.listener.EndlessRecyclerViewScrollListener
 import com.ciuwapp.model.MessageList
 import com.ciuwapp.prefs.PrefsManager
-import com.kaopiz.kprogresshud.KProgressHUD
+import kotlinx.android.synthetic.main.activity_calendar.*
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
 import kotlin.collections.ArrayList
 
 class MessageActivity : AppCompatActivity() {
-    private lateinit var hud: KProgressHUD
     private var current_Page: Int? = 0
     private var next_page_url: String? = null
 
@@ -76,7 +76,7 @@ class MessageActivity : AppCompatActivity() {
 
     private fun initListener() {
         // Adapter item clickListener
-        messageAdapter.setItemClickListener { message ->
+        messageAdapter.setItemClickListener {
 //            Intent(Intent.ACTION_VIEW, Uri.parse(message.content)).takeIf {
 //                it.resolveActivity(packageManager) != null
 //            }?.run(this::startActivity)
@@ -93,12 +93,8 @@ class MessageActivity : AppCompatActivity() {
         showLoading()
         scrollListener.resetState()
 
-        hud = KProgressHUD.create(this)
-        hud.setBackgroundColor(R.color.colorLoading)
-        hud.show()
 
-        ClientAPIService.requestMessage(PrefsManager.newInstance(this)?.getToken(), 0) { succeeded, result ->
-            hud.dismiss()
+        ClientAPIService.requestMessage(PrefsManager.newInstance(this).getToken(), 0) { succeeded, result ->
             if (succeeded) {
                 val msgData: MessageData? = result
                 current_Page = msgData?.current_page
@@ -131,24 +127,19 @@ class MessageActivity : AppCompatActivity() {
 
         showLoading()
 
-        hud = KProgressHUD.create(this)
-        hud.setBackgroundColor(R.color.colorLoading)
-        hud.show()
 
-        ClientAPIService.requestMessage(PrefsManager.newInstance(this)?.getToken(), current_Page!!+1) { succeeded, result ->
-            hud.dismiss()
-
+        ClientAPIService.requestMessage(PrefsManager.newInstance(this).getToken(), current_Page!!+1) { succeeded, result ->
             if (succeeded) {
                 val msgData: MessageData? = result
 
-                if( msgData?.data  == null || msgData?.data.size < 1)
+                if( msgData?.data  == null || msgData.data.size < 1)
                     onToastMessage("there is no exist no longer")
                 else {
-                    current_Page = msgData?.current_page
-                    next_page_url = msgData?.next_page_url
+                    current_Page = msgData.current_page
+                    next_page_url = msgData.next_page_url
                     val messageList: ArrayList<MessageList> = arrayListOf<MessageList>()
 
-                    for (item in msgData?.data!!) {
+                    for (item in msgData.data) {
                         val date = LocalDate.parse(item.date, DateTimeFormatter.ISO_DATE)
                         messageList.add(MessageList(date.month.toString(), date.dayOfMonth, item.message))
                     }
@@ -173,12 +164,11 @@ class MessageActivity : AppCompatActivity() {
 
     private fun showLoading() {
         loading = true
-//        pbLoading.visibility = View.VISIBLE
+        progressBar2.visibility = View.VISIBLE
     }
 
     private fun hideLoading() {
         loading = false
-//        pbLoading.visibility = View.GONE
+        progressBar2.visibility = View.GONE
     }
-
 }

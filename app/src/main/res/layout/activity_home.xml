@@ -31,7 +31,7 @@
                     android:layout_alignParentBottom="true"
                     android:text="HOME"
                     android:textStyle="bold"
-                    android:textSize="@dimen/HomeTitleSize"
+                    android:textSize="@dimen/primaryTitleTextSize"
                     android:textColor="@color/whiteTextColor"
                     android:layout_weight="1"
                     android:textAlignment="center"
@@ -88,125 +88,329 @@
                     android:layout_weight="0.5"
                     android:orientation="vertical">
                     <LinearLayout
-                        android:id="@+id/id_home_calendar"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:layout_marginLeft="@dimen/HomeCardMarginRight"
-                        android:layout_marginRight="@dimen/HomeCardMarginLeft"
-                        android:layout_marginTop="@dimen/HomeCardMarginTop"
-                        android:layout_marginBottom="@dimen/HomeCardMarginBottom"
-                        android:background="@drawable/card_style"
-                        android:orientation="vertical"
-                        android:weightSum="10">
-                            <ImageView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginLeft="@dimen/HomeMarginLeft"
-                                android:layout_marginRight="@dimen/HomeMarginLeft"
-                                android:layout_marginTop="@dimen/HomeMarginTop"
-                                android:layout_marginBottom="@dimen/HomeMarginBottom"
-                                android:background="@drawable/mng_calendar"
-                                android:layout_weight="9">
-                            </ImageView>
+                        android:weightSum="1"
+                        android:orientation="horizontal">
 
-                            <TextView
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="0.25"
+                            >
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="0.6"
+                            android:weightSum="1"
+                            android:orientation="vertical">
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="0dp"
+                                    android:layout_weight="0.15">
+                                </LinearLayout>
+
+                                <LinearLayout
+                                    android:id="@+id/id_home_calendar"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="0dp"
+                                    android:weightSum="1"
+                                    android:layout_weight="0.7"
+                                    android:background="@drawable/card_style"
+                                    android:orientation="vertical">
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="0dp"
+                                        android:layout_weight="0.15">
+                                    </LinearLayout>
+
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="0dp"
+                                        android:layout_weight="0.5"
+                                        android:weightSum="1"
+                                        android:orientation="horizontal">
+                                        <LinearLayout
+                                            android:layout_width="0dp"
+                                            android:layout_height="match_parent"
+                                            android:layout_weight="0.3">
+                                        </LinearLayout>
+                                        <LinearLayout
+                                            android:layout_width="0dp"
+                                            android:layout_height="match_parent"
+                                            android:layout_weight="0.4">
+                                            <ImageView
+                                                android:layout_width="match_parent"
+                                                android:layout_height="match_parent"
+                                                android:background="@drawable/mng_calendar">
+                                            </ImageView>
+
+                                        </LinearLayout>
+                                        <LinearLayout
+                                            android:layout_width="0dp"
+                                            android:layout_height="match_parent"
+                                            android:layout_weight="0.3">
+                                        </LinearLayout>
+
+                                    </LinearLayout>
+
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="0dp"
+                                        android:layout_weight="0.35">
+                                        <TextView
+                                            android:layout_width="match_parent"
+                                            android:layout_height="match_parent"
+                                            android:textAlignment="center"
+                                            android:gravity="center"
+                                            android:textSize="@dimen/primaryTextViewSizeMin"
+                                            android:textColor="@color/colorPrimary"
+                                            android:text="@string/calendar">
+                                        </TextView>
+                                    </LinearLayout>
+                                </LinearLayout>
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="0dp"
+                                    android:layout_weight="0.15">
+                                </LinearLayout>
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="0.15">
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="0.5"
+                android:orientation="vertical">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:weightSum="1"
+                    android:orientation="horizontal">
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="0.15"
+                        >
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="0.6"
+                        android:weightSum="1"
+                        android:orientation="vertical">
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp"
+                            android:layout_weight="0.15">
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/id_home_message"
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp"
+                            android:weightSum="1"
+                            android:layout_weight="0.7"
+                            android:background="@drawable/card_style"
+                            android:orientation="vertical">
+                            <LinearLayout
                                 android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_marginBottom="@dimen/HomeMarginBottom"
-                                android:text="CALENDAR"
-                                android:textSize="@dimen/HomeTextSize"
-                                android:textColor="@color/home_text_color"
-                                android:textAlignment="center"
-                                >
-                            </TextView>
-                    </LinearLayout>
-                </LinearLayout>
+                                android:layout_height="0dp"
+                                android:layout_weight="0.15">
+                            </LinearLayout>
 
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="0.5"
-                    android:orientation="vertical">
-                    <LinearLayout
-                        android:id="@+id/id_home_message"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_marginLeft="@dimen/HomeCardMarginLeft"
-                        android:layout_marginRight="@dimen/HomeCardMarginRight"
-                        android:layout_marginTop="@dimen/HomeCardMarginTop"
-                        android:layout_marginBottom="@dimen/HomeCardMarginBottom"
-                        android:background="@drawable/card_style"
-                        android:orientation="vertical"
-                        android:weightSum="10">
-                        <ImageView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="@dimen/HomeMarginLeft"
-                            android:layout_marginRight="@dimen/HomeMarginLeft"
-                            android:layout_marginTop="@dimen/HomeMarginTop"
-                            android:layout_marginBottom="@dimen/HomeMarginBottom"
-                            android:background="@drawable/mng_message"
-                            android:layout_weight="9">
-                        </ImageView>
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="0dp"
+                                android:layout_weight="0.5"
+                                android:weightSum="1"
+                                android:orientation="horizontal">
+                                <LinearLayout
+                                    android:layout_width="0dp"
+                                    android:layout_height="match_parent"
+                                    android:layout_weight="0.3">
+                                </LinearLayout>
+                                <LinearLayout
+                                    android:layout_width="0dp"
+                                    android:layout_height="match_parent"
+                                    android:layout_weight="0.4">
+                                    <ImageView
+                                        android:layout_width="match_parent"
+                                        android:layout_height="match_parent"
+                                        android:background="@drawable/mng_message">
+                                    </ImageView>
 
-                        <TextView
+                                </LinearLayout>
+                                <LinearLayout
+                                    android:layout_width="0dp"
+                                    android:layout_height="match_parent"
+                                    android:layout_weight="0.3">
+                                </LinearLayout>
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="0dp"
+                                android:layout_weight="0.35">
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:textAlignment="center"
+                                    android:gravity="center"
+                                    android:textSize="@dimen/primaryTextViewSizeMin"
+                                    android:textColor="@color/colorPrimary"
+                                    android:text="@string/message">
+                                </TextView>
+                            </LinearLayout>
+                        </LinearLayout>
+
+                        <LinearLayout
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginBottom="@dimen/HomeMarginBottom"
-                            android:text="MESSAGE"
-                            android:textSize="@dimen/HomeTextSize"
-                            android:textColor="@color/home_text_color"
-                            android:textAlignment="center"
-                            >
-                        </TextView>
+                            android:layout_height="0dp"
+                            android:layout_weight="0.15">
+                        </LinearLayout>
                     </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="0.25">
+                    </LinearLayout>
+
                 </LinearLayout>
+
+            </LinearLayout>
+
         </LinearLayout>
+
+
         <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="1"
-                android:orientation="horizontal"
-                android:weightSum="1"
-                android:id="@+id/id_card_group_2">
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:orientation="horizontal"
+            android:weightSum="1"
+            android:id="@+id/id_card_group_2">
             <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="0.5"
                 android:orientation="vertical">
                 <LinearLayout
-                    android:id="@+id/id_home_benefits"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_marginLeft="@dimen/HomeCardMarginRight"
-                    android:layout_marginRight="@dimen/HomeCardMarginLeft"
-                    android:layout_marginTop="@dimen/HomeCardMarginTop"
-                    android:layout_marginBottom="@dimen/HomeCardMarginBottom"
-                    android:background="@drawable/card_style"
-                    android:orientation="vertical"
-                    android:weightSum="10">
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="@dimen/HomeMarginLeft"
-                        android:layout_marginRight="@dimen/HomeMarginLeft"
-                        android:layout_marginTop="@dimen/HomeMarginTop"
-                        android:layout_marginBottom="@dimen/HomeMarginBottom"
-                        android:background="@drawable/mng_benefits"
-                        android:layout_weight="9">
-                    </ImageView>
+                    android:weightSum="1"
+                    android:orientation="horizontal">
 
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="@dimen/HomeMarginBottom"
-                        android:text="BENEFITS"
-                        android:textSize="@dimen/HomeTextSize"
-                        android:textColor="@color/home_text_color"
-                        android:textAlignment="center"
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="0.25"
                         >
-                    </TextView>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="0.6"
+                        android:weightSum="1"
+                        android:orientation="vertical">
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp"
+                            android:layout_weight="0.15">
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/id_home_benefits"
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp"
+                            android:weightSum="1"
+                            android:layout_weight="0.7"
+                            android:background="@drawable/card_style"
+                            android:orientation="vertical">
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="0dp"
+                                android:layout_weight="0.15">
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="0dp"
+                                android:layout_weight="0.5"
+                                android:weightSum="1"
+                                android:orientation="horizontal">
+                                <LinearLayout
+                                    android:layout_width="0dp"
+                                    android:layout_height="match_parent"
+                                    android:layout_weight="0.3">
+                                </LinearLayout>
+                                <LinearLayout
+                                    android:layout_width="0dp"
+                                    android:layout_height="match_parent"
+                                    android:layout_weight="0.4">
+                                    <ImageView
+                                        android:layout_width="match_parent"
+                                        android:layout_height="match_parent"
+                                        android:background="@drawable/mng_benefits">
+                                    </ImageView>
+
+                                </LinearLayout>
+                                <LinearLayout
+                                    android:layout_width="0dp"
+                                    android:layout_height="match_parent"
+                                    android:layout_weight="0.3">
+                                </LinearLayout>
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="0dp"
+                                android:layout_weight="0.35">
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:textAlignment="center"
+                                    android:gravity="center"
+                                    android:textSize="@dimen/primaryTextViewSizeMin"
+                                    android:textColor="@color/colorPrimary"
+                                    android:text="@string/benefits">
+                                </TextView>
+                            </LinearLayout>
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp"
+                            android:layout_weight="0.15">
+                        </LinearLayout>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="0.15">
+                    </LinearLayout>
+
                 </LinearLayout>
+
             </LinearLayout>
 
             <LinearLayout
@@ -215,129 +419,334 @@
                 android:layout_weight="0.5"
                 android:orientation="vertical">
                 <LinearLayout
-                    android:id="@+id/id_home_contract"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_marginLeft="@dimen/HomeCardMarginLeft"
-                    android:layout_marginRight="@dimen/HomeCardMarginRight"
-                    android:layout_marginTop="@dimen/HomeCardMarginTop"
-                    android:layout_marginBottom="@dimen/HomeCardMarginBottom"
-                    android:background="@drawable/card_style"
-                    android:orientation="vertical"
-                    android:weightSum="10">
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="@dimen/HomeMarginLeft"
-                        android:layout_marginRight="@dimen/HomeMarginLeft"
-                        android:layout_marginTop="@dimen/HomeMarginTop"
-                        android:layout_marginBottom="@dimen/HomeMarginBottom"
-                        android:background="@drawable/mng_contract"
-                        android:layout_weight="9">
-                    </ImageView>
+                    android:weightSum="1"
+                    android:orientation="horizontal">
 
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="@dimen/HomeMarginBottom"
-                        android:text="CONTRACT"
-                        android:textSize="@dimen/HomeTextSize"
-                        android:textColor="@color/home_text_color"
-                        android:textAlignment="center"
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="0.15"
                         >
-                    </TextView>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="0.6"
+                        android:weightSum="1"
+                        android:orientation="vertical">
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp"
+                            android:layout_weight="0.15">
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/id_home_contract"
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp"
+                            android:weightSum="1"
+                            android:layout_weight="0.7"
+                            android:background="@drawable/card_style"
+                            android:orientation="vertical">
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="0dp"
+                                android:layout_weight="0.15">
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="0dp"
+                                android:layout_weight="0.5"
+                                android:weightSum="1"
+                                android:orientation="horizontal">
+                                <LinearLayout
+                                    android:layout_width="0dp"
+                                    android:layout_height="match_parent"
+                                    android:layout_weight="0.3">
+                                </LinearLayout>
+                                <LinearLayout
+                                    android:layout_width="0dp"
+                                    android:layout_height="match_parent"
+                                    android:layout_weight="0.4">
+                                    <ImageView
+                                        android:layout_width="match_parent"
+                                        android:layout_height="match_parent"
+                                        android:background="@drawable/mng_contract">
+                                    </ImageView>
+
+                                </LinearLayout>
+                                <LinearLayout
+                                    android:layout_width="0dp"
+                                    android:layout_height="match_parent"
+                                    android:layout_weight="0.3">
+                                </LinearLayout>
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="0dp"
+                                android:layout_weight="0.35">
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:textAlignment="center"
+                                    android:gravity="center"
+                                    android:textSize="@dimen/primaryTextViewSizeMin"
+                                    android:textColor="@color/colorPrimary"
+                                    android:text="@string/contract">
+                                </TextView>
+                            </LinearLayout>
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp"
+                            android:layout_weight="0.15">
+                        </LinearLayout>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="0.25">
+                    </LinearLayout>
+
                 </LinearLayout>
-            </LinearLayout>
 
             </LinearLayout>
+
+        </LinearLayout>
+
+
         <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="1"
-                android:orientation="horizontal"
-                android:weightSum="1"
-                android:id="@+id/id_card_group_3">
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:orientation="horizontal"
+            android:weightSum="1"
+            android:id="@+id/id_card_group_3">
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="0.5"
+                android:orientation="vertical">
                 <LinearLayout
-                    android:layout_width="0dp"
+                    android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_weight="0.5"
-                    android:orientation="vertical">
+                    android:weightSum="1"
+                    android:orientation="horizontal">
+
                     <LinearLayout
-                        android:id="@+id/id_home_meeting"
-                        android:layout_width="match_parent"
+                        android:layout_width="0dp"
                         android:layout_height="match_parent"
-                        android:layout_marginLeft="@dimen/HomeCardMarginRight"
-                        android:layout_marginRight="@dimen/HomeCardMarginLeft"
-                        android:layout_marginTop="@dimen/HomeCardMarginTop"
-                        android:layout_marginBottom="@dimen/HomeCardMarginBottom"
-                        android:background="@drawable/card_style"
-                        android:orientation="vertical"
-                        android:weightSum="10">
-                        <ImageView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="@dimen/HomeMarginLeft"
-                            android:layout_marginRight="@dimen/HomeMarginLeft"
-                            android:layout_marginTop="@dimen/HomeMarginTop"
-                            android:layout_marginBottom="@dimen/HomeMarginBottom"
-                            android:background="@drawable/mng_meeting"
-                            android:layout_weight="9">
-                        </ImageView>
-
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginBottom="@dimen/HomeMarginBottom"
-                            android:text="MEETING"
-                            android:textSize="@dimen/HomeTextSize"
-                            android:textColor="@color/home_text_color"
-                            android:textAlignment="center"
-                            >
-                        </TextView>
+                        android:layout_weight="0.25"
+                        >
                     </LinearLayout>
-                </LinearLayout>
 
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="0.5"
-                    android:orientation="vertical">
                     <LinearLayout
-                        android:id="@+id/id_home_contact"
-                        android:layout_width="match_parent"
+                        android:layout_width="0dp"
                         android:layout_height="match_parent"
-                        android:layout_marginLeft="@dimen/HomeCardMarginLeft"
-                        android:layout_marginRight="@dimen/HomeCardMarginRight"
-                        android:layout_marginTop="@dimen/HomeCardMarginTop"
-                        android:layout_marginBottom="@dimen/HomeCardMarginBottom"
-                        android:background="@drawable/card_style"
-                        android:orientation="vertical"
-                        android:weightSum="10">
-                        <ImageView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="@dimen/HomeMarginLeft"
-                            android:layout_marginRight="@dimen/HomeMarginLeft"
-                            android:layout_marginTop="@dimen/HomeMarginTop"
-                            android:layout_marginBottom="@dimen/HomeMarginBottom"
-                            android:background="@drawable/mng_contact"
-                            android:layout_weight="9">
-                        </ImageView>
-
-                        <TextView
+                        android:layout_weight="0.6"
+                        android:weightSum="1"
+                        android:orientation="vertical">
+                        <LinearLayout
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginBottom="@dimen/HomeMarginBottom"
-                            android:text="CONTACT"
-                            android:textSize="@dimen/HomeTextSize"
-                            android:textColor="@color/home_text_color"
-                            android:textAlignment="center"
-                            >
-                        </TextView>
+                            android:layout_height="0dp"
+                            android:layout_weight="0.15">
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/id_home_meeting"
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp"
+                            android:weightSum="1"
+                            android:layout_weight="0.7"
+                            android:background="@drawable/card_style"
+                            android:orientation="vertical">
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="0dp"
+                                android:layout_weight="0.15">
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="0dp"
+                                android:layout_weight="0.5"
+                                android:weightSum="1"
+                                android:orientation="horizontal">
+                                <LinearLayout
+                                    android:layout_width="0dp"
+                                    android:layout_height="match_parent"
+                                    android:layout_weight="0.3">
+                                </LinearLayout>
+                                <LinearLayout
+                                    android:layout_width="0dp"
+                                    android:layout_height="match_parent"
+                                    android:layout_weight="0.4">
+                                    <ImageView
+                                        android:layout_width="match_parent"
+                                        android:layout_height="match_parent"
+                                        android:background="@drawable/mng_meeting">
+                                    </ImageView>
+
+                                </LinearLayout>
+                                <LinearLayout
+                                    android:layout_width="0dp"
+                                    android:layout_height="match_parent"
+                                    android:layout_weight="0.3">
+                                </LinearLayout>
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="0dp"
+                                android:layout_weight="0.35">
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:textAlignment="center"
+                                    android:gravity="center"
+                                    android:textSize="@dimen/primaryTextViewSizeMin"
+                                    android:textColor="@color/colorPrimary"
+                                    android:text="@string/meeting">
+                                </TextView>
+                            </LinearLayout>
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp"
+                            android:layout_weight="0.15">
+                        </LinearLayout>
                     </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="0.15">
+                    </LinearLayout>
+
                 </LinearLayout>
 
             </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="0.5"
+                android:orientation="vertical">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:weightSum="1"
+                    android:orientation="horizontal">
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="0.15"
+                        >
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="0.6"
+                        android:weightSum="1"
+                        android:orientation="vertical">
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp"
+                            android:layout_weight="0.15">
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/id_home_contact"
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp"
+                            android:weightSum="1"
+                            android:layout_weight="0.7"
+                            android:background="@drawable/card_style"
+                            android:orientation="vertical">
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="0dp"
+                                android:layout_weight="0.15">
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="0dp"
+                                android:layout_weight="0.5"
+                                android:weightSum="1"
+                                android:orientation="horizontal">
+                                <LinearLayout
+                                    android:layout_width="0dp"
+                                    android:layout_height="match_parent"
+                                    android:layout_weight="0.3">
+                                </LinearLayout>
+                                <LinearLayout
+                                    android:layout_width="0dp"
+                                    android:layout_height="match_parent"
+                                    android:layout_weight="0.4">
+                                    <ImageView
+                                        android:layout_width="match_parent"
+                                        android:layout_height="match_parent"
+                                        android:background="@drawable/mng_contact">
+                                    </ImageView>
+
+                                </LinearLayout>
+                                <LinearLayout
+                                    android:layout_width="0dp"
+                                    android:layout_height="match_parent"
+                                    android:layout_weight="0.3">
+                                </LinearLayout>
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="0dp"
+                                android:layout_weight="0.35">
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:textAlignment="center"
+                                    android:gravity="center"
+                                    android:textSize="@dimen/primaryTextViewSizeMin"
+                                    android:textColor="@color/colorPrimary"
+                                    android:text="@string/contact">
+                                </TextView>
+                            </LinearLayout>
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp"
+                            android:layout_weight="0.15">
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="0.25">
+                    </LinearLayout>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </LinearLayout>
 
     </LinearLayout>
+
 </LinearLayout>

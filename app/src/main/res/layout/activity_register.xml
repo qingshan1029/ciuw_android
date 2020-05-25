@@ -12,7 +12,7 @@
     <LinearLayout
         android:id="@+id/registerWrapper"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:orientation="vertical">
         <RelativeLayout
             android:layout_width="match_parent"
@@ -22,7 +22,7 @@
             <ImageView
                 android:id="@+id/btn_back"
                 android:layout_width="30dp"
-                android:layout_height="30dp"
+                android:layout_height="20dp"
                 android:tint="@color/whiteTextColor"
                 android:layout_marginTop="20dp"
                 android:layout_marginLeft="5dp"
@@ -39,122 +39,149 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="0.65"
-            android:orientation="vertical">
+            android:layout_weight="0.62"
+            android:weightSum="1"
+            android:orientation="horizontal">
 
-            <TextView
-                android:id="@+id/tv_email"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/loginViewMarginLeftSize"
-                android:layout_marginRight="@dimen/loginViewMarginLeftSize"
-                android:textColor="@color/whiteTextColor"
-                android:textSize="@dimen/loginViewTextSize"
-                android:text="@string/login_email"/>
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="0.1"
+                android:orientation="vertical">
+            </LinearLayout>
 
-            <EditText
-                android:id="@+id/et_email"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/loginControlSize"
-                android:layout_marginLeft="@dimen/loginViewMarginLeftSize"
-                android:layout_marginRight="@dimen/loginViewMarginLeftSize"
-                android:layout_below="@id/tv_email"
-                android:layout_marginTop="@dimen/registerViewMarginTopSize"
-                android:background="@drawable/et_style"
-                android:hint="@string/login_email_hint"
-                android:inputType="textEmailAddress"
-                android:maxLines="1"
-                android:paddingLeft="16dp"
-                android:textSize="@dimen/loginViewTextSize" />
 
-            <TextView
-                android:id="@+id/tv_password"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/loginViewMarginLeftSize"
-                android:layout_marginRight="@dimen/loginViewMarginLeftSize"
-                android:textColor="@color/whiteTextColor"
-                android:textSize="@dimen/loginViewTextSize"
-                android:layout_below="@id/et_email"
-                android:layout_marginTop="@dimen/registerViewMarginTopSize"
-                android:text="@string/login_password"/>
-            <EditText
-                android:id="@+id/et_password"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/loginControlSize"
-                android:layout_marginLeft="@dimen/loginViewMarginLeftSize"
-                android:layout_marginRight="@dimen/loginViewMarginLeftSize"
-                android:inputType="textPassword"
-                android:layout_below="@id/tv_password"
-                android:layout_marginTop="@dimen/registerViewMarginTopSize"
-                android:maxLines="1"
-                android:background="@drawable/et_style"
-                android:textSize="@dimen/loginViewTextSize"
-                android:paddingLeft="16dp"
-                android:autofillHints="" />
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:weightSum="1"
+                android:layout_weight="0.8"
+                android:orientation="vertical">
 
-            <TextView
-                android:id="@+id/tv_first_name"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/loginViewMarginLeftSize"
-                android:layout_marginRight="@dimen/loginViewMarginLeftSize"
-                android:textColor="@color/whiteTextColor"
-                android:textSize="@dimen/loginViewTextSize"
-                android:layout_below="@id/et_email"
-                android:layout_marginTop="@dimen/registerViewMarginTopSize"
-                android:text="@string/login_first_name"/>
-            <EditText
-                android:id="@+id/et_first_name"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/loginControlSize"
-                android:layout_marginLeft="@dimen/loginViewMarginLeftSize"
-                android:layout_marginRight="@dimen/loginViewMarginLeftSize"
-                android:inputType="textPersonName"
-                android:layout_below="@id/tv_password"
-                android:layout_marginTop="@dimen/registerViewMarginTopSize"
-                android:maxLines="1"
-                android:background="@drawable/et_style"
-                android:textSize="@dimen/loginViewTextSize"
-                android:paddingLeft="16dp"
-                android:autofillHints="" />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="0.8"
+                    android:orientation="vertical">
+                    <TextView
+                        android:id="@+id/tv_email"
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="0.1"
+                        android:textColor="@color/whiteTextColor"
+                        android:gravity="bottom"
+                        android:textSize="@dimen/primaryTextViewSizeMin"
+                        android:text="@string/login_email"/>
+                    <EditText
+                        android:id="@+id/et_email"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/primaryControlSize"
+                        android:layout_marginTop="5dp"
+                        android:background="@drawable/et_style"
+                        android:inputType="textEmailAddress"
+                        android:maxLines="1"
+                        android:paddingLeft="16dp"
+                        android:textSize="@dimen/primaryEditTextSizeMin">
+                    </EditText>
+                    <TextView
+                        android:id="@+id/tv_password"
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="0.1"
+                        android:layout_marginTop="5dp"
+                        android:textColor="@color/whiteTextColor"
+                        android:gravity="bottom"
+                        android:textSize="@dimen/primaryTextViewSizeMin"
+                        android:text="@string/login_password"/>
+                    <EditText
+                        android:id="@+id/et_password"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/primaryControlSize"
+                        android:layout_marginTop="5dp"
+                        android:background="@drawable/et_style"
+                        android:inputType="textPassword"
+                        android:maxLines="1"
+                        android:paddingLeft="16dp"
+                        android:textSize="@dimen/primaryEditTextSizeMin">
+                    </EditText>
+                    <TextView
+                        android:id="@+id/tv_first_name"
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="0.1"
+                        android:layout_marginTop="5dp"
+                        android:textColor="@color/whiteTextColor"
+                        android:gravity="bottom"
+                        android:textSize="@dimen/primaryTextViewSizeMin"
+                        android:text="@string/login_first_name"/>
+                    <EditText
+                        android:id="@+id/et_first_name"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/primaryControlSize"
+                        android:layout_marginTop="5dp"
+                        android:background="@drawable/et_style"
+                        android:inputType="textPersonName"
+                        android:maxLines="1"
+                        android:paddingLeft="16dp"
+                        android:textSize="@dimen/primaryEditTextSizeMin">
+                    </EditText>
+                    <TextView
+                        android:id="@+id/tv_last_name"
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="0.1"
+                        android:layout_marginTop="5dp"
+                        android:textColor="@color/whiteTextColor"
+                        android:gravity="bottom"
+                        android:textSize="@dimen/primaryTextViewSizeMin"
+                        android:text="@string/login_password"/>
+                    <EditText
+                        android:id="@+id/et_last_name"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/primaryControlSize"
+                        android:layout_marginTop="5dp"
+                        android:background="@drawable/et_style"
+                        android:inputType="textPersonName"
+                        android:maxLines="1"
+                        android:paddingLeft="16dp"
+                        android:textSize="@dimen/primaryEditTextSizeMin">
+                    </EditText>
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="0.1"
+                        android:layout_marginTop="5dp"/>
+                    <Button
+                        android:id="@+id/btn_register"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/primaryControlSize"
+                        android:layout_marginTop="5dp"
+                        android:background="@color/login_btn_bk_color"
+                        android:textColor="@color/whiteTextColor"
+                        android:textSize="@dimen/primaryButtonTextSize"
+                        android:text="@string/login_btn_register"/>
+                </LinearLayout>
 
-            <TextView
-                android:id="@+id/tv_last_name"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/loginViewMarginLeftSize"
-                android:layout_marginRight="@dimen/loginViewMarginLeftSize"
-                android:textColor="@color/whiteTextColor"
-                android:textSize="@dimen/loginViewTextSize"
-                android:layout_below="@id/et_email"
-                android:layout_marginTop="@dimen/registerViewMarginTopSize"
-                android:text="@string/login_last_name"/>
-            <EditText
-                android:id="@+id/et_last_name"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/loginControlSize"
-                android:layout_marginLeft="@dimen/loginViewMarginLeftSize"
-                android:layout_marginRight="@dimen/loginViewMarginLeftSize"
-                android:inputType="textPersonName"
-                android:layout_below="@id/tv_password"
-                android:layout_marginTop="@dimen/registerViewMarginTopSize"
-                android:maxLines="1"
-                android:background="@drawable/et_style"
-                android:textSize="@dimen/loginViewTextSize"
-                android:paddingLeft="16dp"
-                android:autofillHints="" />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="0.2"
+                    android:orientation="vertical">
+                </LinearLayout>
+            </LinearLayout>
 
-            <Button
-                android:id="@+id/btn_register"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/loginControlSize"
-                android:layout_marginLeft="@dimen/loginViewMarginLeftSize"
-                android:layout_marginRight="@dimen/loginViewMarginLeftSize"
-                android:background="@color/login_btn_bk_color"
-                android:layout_marginTop="30dp"
-                android:textColor="@color/whiteTextColor"
-                android:text="@string/login_btn_register"/>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:weightSum="1"
+                android:layout_weight="0.1"
+                android:orientation="vertical">
+            </LinearLayout>
+
         </LinearLayout>
+
     </LinearLayout>
+
 </LinearLayout>
+

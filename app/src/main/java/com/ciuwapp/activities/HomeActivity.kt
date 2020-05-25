@@ -60,7 +60,7 @@ class HomeActivity : AppCompatActivity() {
 
         var dlg = CustomAlertDialog(this)
 
-        var clickListenerYes = View.OnClickListener { view ->
+        var clickListenerYes = View.OnClickListener {
 
             dlg.dismiss()
             PrefsManager.newInstance(this).logout()
@@ -69,7 +69,7 @@ class HomeActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
-        var clickListenerNo = View.OnClickListener {view ->
+        var clickListenerNo = View.OnClickListener {
             dlg.dismiss()
         }
 

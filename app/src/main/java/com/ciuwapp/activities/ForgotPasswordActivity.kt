@@ -4,6 +4,7 @@ import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
+import android.util.Log
 import android.view.View
 import android.widget.Button
 import android.widget.EditText
@@ -40,7 +41,13 @@ class ForgotPasswordActivity : AppCompatActivity() {
         var password = et_password.text.toString()
 
 
-        if(!AppHelper.isEmailValid(email)){
+        if( email.isEmpty() ) {
+            this.launchAlertDialog("Enter your email.")
+            return
+        }
+
+        if(!AppHelper.isEmailValid(email)) {
+            //et_email.error = "Enter the valid email."
             this.launchAlertDialog("Enter the valid email.")
             return
         }
@@ -52,20 +59,22 @@ class ForgotPasswordActivity : AppCompatActivity() {
 
         hud = KProgressHUD.create(this)
         hud.setBackgroundColor(R.color.colorLoading)
+        hud.setLabel("Progressing...")
         hud.show()
 
         ClientAPIService.requestForgotPassword(email, password) { succeeded, result ->
             hud.dismiss()
             if (succeeded == 200) {
+                Log.e("success", result.toString())
                 launchVerifyCodeActivity()
             } else if (succeeded == 400) {  // error:
-                hud.setLabel("The email unregistered")
+                hud.setLabel("Invalid email.")
                     .show()
                 Handler().postDelayed({
                     hud.dismiss()
                 }, 2000)
             } else {
-                hud.setLabel("Failed")
+                hud.setLabel("Please try again later.")
                     .show()
                 Handler().postDelayed({
                     hud.dismiss()
@@ -101,12 +110,12 @@ class ForgotPasswordActivity : AppCompatActivity() {
     private fun launchVerifyCodeActivity() {
         var dlg = VerifyCodeActivity(this)
 
-        var clickListenerYes = View.OnClickListener { view ->
+        var clickListenerYes = View.OnClickListener {
 
             sendVerification(dlg, dlg.editText?.text.toString())
         }
 
-        var clickListenerNo = View.OnClickListener {view ->
+        var clickListenerNo = View.OnClickListener {
             dlg.dismiss()
         }
 
@@ -126,13 +135,15 @@ class ForgotPasswordActivity : AppCompatActivity() {
 
         hud = KProgressHUD.create(this)
         hud.setBackgroundColor(R.color.colorLoading)
+        hud.setLabel("Progressing...")
         hud.show()
 
         ClientAPIService.requestResetPassword(email, code) { succeeded, result ->
             hud.dismiss()
 
             if (succeeded == 200) {
-                hud.setLabel("successful")
+                Log.e("success", result.toString())
+                hud.setLabel("Your password has been reset successfully!")
                     .show()
                 Handler().postDelayed({
                     hud.dismiss()
@@ -141,13 +152,13 @@ class ForgotPasswordActivity : AppCompatActivity() {
                 }, 2000)
 
             } else if (succeeded == 401) {// error:
-                hud.setLabel("incorrect code")
+                hud.setLabel("Invalid code.")
                     .show()
                 Handler().postDelayed({
                     hud.dismiss()
                 }, 2000)
             } else {
-                hud.setLabel("Failed")
+                hud.setLabel("Failed to reset password.")
                     .show()
                 Handler().postDelayed({
                     hud.dismiss()
@@ -163,7 +174,6 @@ class ForgotPasswordActivity : AppCompatActivity() {
 
         val btn_send: Button = myview.findViewById(R.id.btn_send)
         val btn_verify_cancel: Button = myview.findViewById(R.id.btn_verify_cancel)
-        val text_code: EditText = myview.findViewById(R.id.et_verify_code)
 
         btn_send.setOnClickListener {
 

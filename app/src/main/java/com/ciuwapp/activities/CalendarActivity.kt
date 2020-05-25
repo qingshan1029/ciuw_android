@@ -4,20 +4,17 @@ import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.ciuwapp.R
 import com.ciuwapp.adapter.CalendarAdapter
-import com.ciuwapp.adapter.MessageAdapter
 import com.ciuwapp.api.ClientAPIService
 import com.ciuwapp.data.CalendarData
-import com.ciuwapp.data.MessageData
 import com.ciuwapp.listener.EndlessRecyclerViewScrollListener
 import com.ciuwapp.model.Calendar
-import com.ciuwapp.model.MessageList
 import com.ciuwapp.prefs.PrefsManager
-import com.kaopiz.kprogresshud.KProgressHUD
 import kotlinx.android.synthetic.main.activity_calendar.*
 import java.text.SimpleDateFormat
 import java.time.LocalDate
@@ -27,7 +24,6 @@ import java.time.format.DateTimeFormatter
 
 class CalendarActivity : AppCompatActivity() {
 
-    private lateinit var hud: KProgressHUD
     private var current_Page: Int? = 0
     private var next_page_url: String? = null
 
@@ -100,12 +96,8 @@ class CalendarActivity : AppCompatActivity() {
         showLoading()
         scrollListener.resetState()
 
-        hud = KProgressHUD.create(this)
-        hud.setBackgroundColor(R.color.colorLoading)
-        hud.show()
+        ClientAPIService.requestCalendar(PrefsManager.newInstance(this).getToken(), 0) { succeeded, result ->
 
-        ClientAPIService.requestCalendar(PrefsManager.newInstance(this)?.getToken(), 0) { succeeded, result ->
-            hud.dismiss()
             if (succeeded) {
                 val msgData: CalendarData? = result
                 current_Page = msgData?.current_page
@@ -120,7 +112,8 @@ class CalendarActivity : AppCompatActivity() {
                     val start_time = sdf.parse(item.start_time)
                     val end_time = sdf.parse(item.end_time)
 
-                    calendarList.add(Calendar(date.month.toString(), date.dayOfMonth, sdfs.format(start_time), sdfs.format(end_time), item.title, item.location, item.websiteurl))
+                    if( start_time != null && end_time != null )
+                        calendarList.add(Calendar(date.month.toString(), date.dayOfMonth, sdfs.format(start_time), sdfs.format(end_time), item.title, item.location, item.websiteurl))
                 }
 
                 calendarAdapter.clear()
@@ -144,12 +137,8 @@ class CalendarActivity : AppCompatActivity() {
 
         showLoading()
 
-        hud = KProgressHUD.create(this)
-        hud.setBackgroundColor(R.color.colorLoading)
-        hud.show()
+        ClientAPIService.requestCalendar(PrefsManager.newInstance(this).getToken(), current_Page!!+1) { succeeded, result ->
 
-        ClientAPIService.requestCalendar(PrefsManager.newInstance(this)?.getToken(), current_Page!!+1) { succeeded, result ->
-            hud.dismiss()
             if (succeeded) {
                 val msgData: CalendarData? = result
                 current_Page = msgData?.current_page
@@ -182,11 +171,12 @@ class CalendarActivity : AppCompatActivity() {
 
     private fun showLoading() {
         loading = true
-//        pbLoading.visibility = View.VISIBLE
+        progressBar1.visibility = View.VISIBLE
     }
 
     private fun hideLoading() {
         loading = false
-//        pbLoading.visibility = View.GONE
+        progressBar1.visibility = View.GONE
     }
+
 }

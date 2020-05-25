@@ -26,8 +26,7 @@ class CalendarAdapter : RecyclerView.Adapter<CalendarAdapter.CalendarViewHolder>
 
 
     override fun getItemCount(): Int {
-//      return items.size
-        return if (items == null) 0 else items!!.size
+        return items.size
     }
 
     override fun onBindViewHolder(holder: CalendarAdapter.CalendarViewHolder, position: Int) {

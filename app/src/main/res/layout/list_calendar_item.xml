@@ -67,8 +67,6 @@
                         android:text="The United Kingdom's four countries "
                         android:textColor="@color/calendar_day_color"
                         android:maxLines="3"
-                        android:textStyle="bold"
-
                         android:textSize="@dimen/CalendarMonthDaySize">
                     </TextView>
                 </LinearLayout>

@@ -27,9 +27,6 @@ class LoginActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
 
-        et_email.setText("test1@test1.com")
-        et_password.setText("123456")
-
         btn_login.setOnClickListener {
             launchLogin()
         }
@@ -47,6 +44,10 @@ class LoginActivity : AppCompatActivity() {
         var email = et_email.text.toString()
         var password = et_password.text.toString()
 
+        if( email.isEmpty() ) {
+            this.launchAlertDialog("Enter your email.")
+            return
+        }
 
         if(!AppHelper.isEmailValid(email)){
             this.launchAlertDialog("Enter the valid email.")
@@ -60,6 +61,7 @@ class LoginActivity : AppCompatActivity() {
 
         hud = KProgressHUD.create(this)
         hud.setBackgroundColor(R.color.colorLoading)
+        hud.setLabel("Logging in...")
         hud.show()
 
         ClientAPIService.requestLogin(email, password) { succeeded, result ->
@@ -73,7 +75,7 @@ class LoginActivity : AppCompatActivity() {
                     PrefsManager.newInstance(this).setPassword(password)
                     PrefsManager.newInstance(this).setToken(userData.token)
 
-                    hud.setLabel("Login Successful")
+                    hud.setLabel("Login successful.")
                         .show()
                     Handler().postDelayed({
                         hud.dismiss()
@@ -81,28 +83,28 @@ class LoginActivity : AppCompatActivity() {
                     }, 2000)
                 }
                 else{
-                    hud.setLabel("token is null")
+                    hud.setLabel("Failed to login.") //token is null
                         .show()
                     Handler().postDelayed({
                         hud.dismiss()
                     }, 2000)
                 }
             } else if (succeeded == 401) {// error: Your are not approved yet
-                hud.setLabel("Your are not approved yet.")
+                hud.setLabel("Not approved yet.")
                     .show()
                 Handler().postDelayed({
                     hud.dismiss()
                 }, 2000)
             }
             else if( succeeded == 400 ) {  // error: invalid user name or password
-                hud.setLabel("Invalid user name or password.")
+                hud.setLabel("Invalid email or password.")
                     .show()
                 Handler().postDelayed({
                     hud.dismiss()
                 }, 2000)
             }
             else {
-                hud.setLabel("Failed to login")
+                hud.setLabel("Failed to login.")
                     .show()
                 Handler().postDelayed({
                     hud.dismiss()

@@ -54,7 +54,6 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:maxLines="3"
-                    android:textStyle="bold"
                     android:text="Example mesage text..."
                     android:textColor="@color/calendar_day_color"
                     android:textSize="@dimen/CalendarMonthDaySize">

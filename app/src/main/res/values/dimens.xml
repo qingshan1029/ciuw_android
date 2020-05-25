@@ -1,18 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <dimen name="primaryButtonTextSize">16sp</dimen>
+    <dimen name="primaryEditTextSizeMin">16sp</dimen>
+    <dimen name="primaryTextViewSizeMin">14sp</dimen>
+    <dimen name="primaryTitleTextSize">18sp</dimen>
+    <dimen name="primaryControlSize">35dp</dimen>
+
+
     <dimen name="headerTextSize">25sp</dimen>
     <dimen name="newsMoreTextSize">12sp</dimen>
     <dimen name="loginViewMarginTopSize">20dp</dimen>
     <dimen name="loginViewMarginLeftSize">40dp</dimen>
-    <dimen name="loginViewTextSize">16sp</dimen>
-    <dimen name="loginControlSize">40dp</dimen>
     <dimen name="registerViewMarginTopSize">5dp</dimen>
-    <dimen name="ForgotPasswordTextSize">20sp</dimen>
     <dimen name="ForgotPasswordMarginTop">15dp</dimen>
     <dimen name="ForgotPasswordMarginBottom">10dp</dimen>
 
 
-    <dimen name="HomeTitleSize">18sp</dimen>
     <dimen name="HomeTextSize">14sp</dimen>
     <dimen name="HomeMarginLeft">40dp</dimen>
     <dimen name="HomeMarginRight">40dp</dimen>

@@ -22,17 +22,17 @@ class SplashActivity : AppCompatActivity() {
         var email = PrefsManager.newInstance(this).getEmail()
         var password = PrefsManager.newInstance(this).getPassword()
 
-        if (email?.isEmpty() or password?.isEmpty()) {
+        if (email.isEmpty() or password.isEmpty()) {
             Handler().postDelayed({
                 launchLoginActivity()
             }, 2000)
         } else {
-            ClientAPIService.requestLogin(email!!, password!!) { succeeded, result ->
+            ClientAPIService.requestLogin(email, password) { succeeded, result ->
                 if (succeeded == 200) {
                     val userData: UserData? = result
                     if (userData?.token != null) {
                         AppHelper.userProfile = userData.user
-                        PrefsManager.newInstance(this)?.setToken(userData?.token)
+                        PrefsManager.newInstance(this).setToken(userData.token)
                         launchHomeActivity()
                     } else {
                         launchLoginActivity()

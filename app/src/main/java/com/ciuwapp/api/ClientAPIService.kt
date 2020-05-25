@@ -39,13 +39,15 @@ class ClientAPIService {
                         callback(code, null)
                     } else if( code == 200 ) {  // Ok but body is null
                         callback(402, null)
+                    } else {
+                        callback(404, null)
                     }
                 }
             })
         }
 
         fun requestRegister(
-            email: String, password: String, password_confirmation: String, first_name: String, last_name: String, callback: (succeeded: Boolean, result: UserData?) -> Unit
+            email: String, password: String, password_confirmation: String, first_name: String, last_name: String, callback: (succeeded: Int, result: UserData?) -> Unit
         ) {
             client.requestRegister(email,password,password_confirmation,first_name,last_name).enqueue(object: Callback<UserData>{
 
@@ -54,15 +56,19 @@ class ClientAPIService {
                         "ClientAPIService",
                         "Could not get network status ${t.localizedMessage}"
                     )
-                    callback(false, null)
+                    callback(-1, null)
                 }
                 override fun onResponse(call: Call<UserData>, response: Response<UserData>) {
                     Log.d("ClientAPIService", "Got the user back ${response.body()}")
-                    if (response.body() != null) {
+                    val code = response.code()
+                    if (code == 201) {
                         var postResponse = response.body()!!
-                        callback(true, postResponse)
-                    } else {
-                        callback(false, null)
+                        callback(code, postResponse)
+                    } else if( code == 400 ) {
+                        callback(code, null)
+                    }
+                    else {
+                        callback(404, null)
                     }
                 }
             })

@@ -35,7 +35,7 @@ class CustomAlertDialog(Context: Context): Dialog(Context) {
         textTitle = findViewById(R.id.textTitle) as TextView
         textBody = findViewById(R.id.textBody) as TextView
         confirmButton = findViewById(R.id.confirmButton)
-        confirmButton?.setOnClickListener { view ->
+        confirmButton?.setOnClickListener {
             dismiss()
         }
     }
@@ -72,12 +72,12 @@ class CustomAlertDialog(Context: Context): Dialog(Context) {
         Log.d("Dialog", "Set content text to ${text}")
         textBody?.visibility = View.VISIBLE
         if (textBody != null) {
-            var htmlString: Spanned? = null
+            var htmlString: Spanned?
             if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
                 htmlString = Html.fromHtml(text, HtmlCompat.FROM_HTML_MODE_LEGACY)
             }
             else{
-                htmlString = Html.fromHtml(text)
+                htmlString = Html.fromHtml(text, HtmlCompat.FROM_HTML_MODE_LEGACY)
             }
             textBody?.text = htmlString
 
