@@ -33,7 +33,7 @@
         android:padding="5dp"
         android:textAlignment="center"
         android:background="@drawable/et_style"
-        android:textSize="18sp"
+        android:textSize="16sp"
         >
     </EditText>
 
@@ -52,12 +52,10 @@
             <Button
                 android:id="@+id/btn_verify_cancel"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:layout_marginLeft="5dp"
                 android:layout_marginRight="5dp"
-                android:background="@drawable/button_round_left_style"
-                android:textColor="@color/whiteTextColor"
                 android:textSize="@dimen/primaryButtonTextSize"
                 android:text="Cancel"
                 >
@@ -71,12 +69,10 @@
             <Button
                 android:id="@+id/btn_send"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:layout_marginLeft="5dp"
                 android:layout_marginRight="5dp"
-                android:background="@drawable/button_round_left_style"
-                android:textColor="@color/whiteTextColor"
                 android:textSize="@dimen/primaryButtonTextSize"
                 android:text="OK"
 

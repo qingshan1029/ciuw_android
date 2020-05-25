@@ -1,6 +1,6 @@
 package com.ciuwapp.data
 
-data class Message (
+data class MessageInfo (
     val id: Int,
     val date: String,
     val message: String
@@ -8,7 +8,7 @@ data class Message (
 
 data class MessageData(
     val current_page: Int,
-    val data: ArrayList<Message>?,
+    val data: ArrayList<MessageInfo>?,
     val first_page_url: String?,
     val from: Int,
     val next_page_url: String?,

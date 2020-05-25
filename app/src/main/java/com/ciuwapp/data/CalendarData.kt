@@ -1,6 +1,6 @@
 package com.ciuwapp.data
 
-data class Calendar (
+data class CalendarInfo (
     var id: Int,
     var title: String,
     var date: String,
@@ -13,7 +13,7 @@ data class Calendar (
 
 data class CalendarData(
     var current_page: Int,
-    var data: ArrayList<Calendar>?,
+    var data: ArrayList<CalendarInfo>?,
     var first_page_url: String?,
     var from: Int,
     var next_page_url: String?,

@@ -54,20 +54,17 @@
             <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:weightSum="1"
                 android:layout_weight="0.8"
                 android:orientation="vertical">
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="0dp"
-                    android:layout_weight="0.8"
+                    android:layout_height="wrap_content"
                     android:orientation="vertical">
                     <TextView
                         android:id="@+id/tv_email"
                         android:layout_width="match_parent"
-                        android:layout_height="0dp"
-                        android:layout_weight="0.1"
+                        android:layout_height="wrap_content"
                         android:textColor="@color/whiteTextColor"
                         android:gravity="bottom"
                         android:textSize="@dimen/primaryTextViewSizeMin"
@@ -86,8 +83,7 @@
                     <TextView
                         android:id="@+id/tv_password"
                         android:layout_width="match_parent"
-                        android:layout_height="0dp"
-                        android:layout_weight="0.1"
+                        android:layout_height="wrap_content"
                         android:layout_marginTop="5dp"
                         android:textColor="@color/whiteTextColor"
                         android:gravity="bottom"
@@ -107,8 +103,7 @@
                     <TextView
                         android:id="@+id/tv_first_name"
                         android:layout_width="match_parent"
-                        android:layout_height="0dp"
-                        android:layout_weight="0.1"
+                        android:layout_height="wrap_content"
                         android:layout_marginTop="5dp"
                         android:textColor="@color/whiteTextColor"
                         android:gravity="bottom"
@@ -128,13 +123,12 @@
                     <TextView
                         android:id="@+id/tv_last_name"
                         android:layout_width="match_parent"
-                        android:layout_height="0dp"
-                        android:layout_weight="0.1"
+                        android:layout_height="wrap_content"
                         android:layout_marginTop="5dp"
                         android:textColor="@color/whiteTextColor"
                         android:gravity="bottom"
                         android:textSize="@dimen/primaryTextViewSizeMin"
-                        android:text="@string/login_password"/>
+                        android:text="@string/login_last_name"/>
                     <EditText
                         android:id="@+id/et_last_name"
                         android:layout_width="match_parent"
@@ -148,25 +142,17 @@
                     </EditText>
                     <TextView
                         android:layout_width="match_parent"
-                        android:layout_height="0dp"
-                        android:layout_weight="0.1"
+                        android:layout_height="wrap_content"
                         android:layout_marginTop="5dp"/>
                     <Button
                         android:id="@+id/btn_register"
                         android:layout_width="match_parent"
-                        android:layout_height="@dimen/primaryControlSize"
+                        android:layout_height="@dimen/primaryButtonSize"
                         android:layout_marginTop="5dp"
                         android:background="@color/login_btn_bk_color"
                         android:textColor="@color/whiteTextColor"
                         android:textSize="@dimen/primaryButtonTextSize"
                         android:text="@string/login_btn_register"/>
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="0dp"
-                    android:layout_weight="0.2"
-                    android:orientation="vertical">
                 </LinearLayout>
             </LinearLayout>
 
@@ -174,7 +160,6 @@
             <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:weightSum="1"
                 android:layout_weight="0.1"
                 android:orientation="vertical">
             </LinearLayout>

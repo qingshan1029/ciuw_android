@@ -141,11 +141,13 @@
                                             android:layout_width="0dp"
                                             android:layout_height="match_parent"
                                             android:layout_weight="0.4">
+
                                             <ImageView
                                                 android:layout_width="match_parent"
                                                 android:layout_height="match_parent"
-                                                android:background="@drawable/mng_calendar">
-                                            </ImageView>
+                                                android:adjustViewBounds="true"
+                                                android:scaleType="fitCenter"
+                                                android:src="@drawable/mng_calendar"/>
 
                                         </LinearLayout>
                                         <LinearLayout
@@ -251,7 +253,9 @@
                                     <ImageView
                                         android:layout_width="match_parent"
                                         android:layout_height="match_parent"
-                                        android:background="@drawable/mng_message">
+                                        android:adjustViewBounds="true"
+                                        android:scaleType="fitCenter"
+                                        android:src="@drawable/mng_message">
                                     </ImageView>
 
                                 </LinearLayout>
@@ -368,7 +372,9 @@
                                     <ImageView
                                         android:layout_width="match_parent"
                                         android:layout_height="match_parent"
-                                        android:background="@drawable/mng_benefits">
+                                        android:adjustViewBounds="true"
+                                        android:scaleType="fitCenter"
+                                        android:src="@drawable/mng_benefits">
                                     </ImageView>
 
                                 </LinearLayout>
@@ -474,8 +480,10 @@
                                     android:layout_weight="0.4">
                                     <ImageView
                                         android:layout_width="match_parent"
-                                        android:layout_height="match_parent"
-                                        android:background="@drawable/mng_contract">
+                                        android:layout_height="wrap_content"
+                                        android:adjustViewBounds="true"
+                                        android:scaleType="fitCenter"
+                                        android:src="@drawable/mng_contract">
                                     </ImageView>
 
                                 </LinearLayout>
@@ -592,7 +600,9 @@
                                     <ImageView
                                         android:layout_width="match_parent"
                                         android:layout_height="match_parent"
-                                        android:background="@drawable/mng_meeting">
+                                        android:adjustViewBounds="true"
+                                        android:scaleType="fitCenter"
+                                        android:src="@drawable/mng_meeting">
                                     </ImageView>
 
                                 </LinearLayout>
@@ -699,7 +709,9 @@
                                     <ImageView
                                         android:layout_width="match_parent"
                                         android:layout_height="match_parent"
-                                        android:background="@drawable/mng_contact">
+                                        android:adjustViewBounds="true"
+                                        android:scaleType="fitCenter"
+                                        android:src="@drawable/mng_contact">
                                     </ImageView>
 
                                 </LinearLayout>

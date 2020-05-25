@@ -4,7 +4,8 @@
     <dimen name="primaryEditTextSizeMin">16sp</dimen>
     <dimen name="primaryTextViewSizeMin">14sp</dimen>
     <dimen name="primaryTitleTextSize">18sp</dimen>
-    <dimen name="primaryControlSize">35dp</dimen>
+    <dimen name="primaryControlSize">33dp</dimen>
+    <dimen name="primaryButtonSize">38dp</dimen>
 
 
     <dimen name="headerTextSize">25sp</dimen>

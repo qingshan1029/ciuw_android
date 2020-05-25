@@ -80,12 +80,12 @@ abstract class EndlessRecyclerViewScrollListener : RecyclerView.OnScrollListener
                 (mLayoutManager as LinearLayoutManager).findFirstVisibleItemPosition()
         }
 
-        if (dy < 0 && firstVisibleItemPostion == 0) {   // refresh
+        if (dy < -100 && firstVisibleItemPostion == 0) {   // refresh
             resetState()
             onRefresh()
         }
 
-        if (!loading && lastVisibleItemPosition + visibleThreshold > totalItemCount) {
+        if (dy > 50 && !loading && lastVisibleItemPosition + visibleThreshold > totalItemCount) {
             currentPage++
             onLoadMore1(currentPage, totalItemCount, view)
             loading = true

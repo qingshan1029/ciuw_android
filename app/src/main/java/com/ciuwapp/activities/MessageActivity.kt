@@ -5,7 +5,6 @@ import android.os.Bundle
 import kotlinx.android.synthetic.main.activity_message.*
 
 import android.content.Intent
-import android.util.Log
 import android.view.View
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -16,9 +15,6 @@ import com.ciuwapp.data.*
 import com.ciuwapp.listener.EndlessRecyclerViewScrollListener
 import com.ciuwapp.model.MessageList
 import com.ciuwapp.prefs.PrefsManager
-import kotlinx.android.synthetic.main.activity_calendar.*
-import java.time.LocalDate
-import java.time.format.DateTimeFormatter
 import kotlin.collections.ArrayList
 
 class MessageActivity : AppCompatActivity() {
@@ -44,10 +40,6 @@ class MessageActivity : AppCompatActivity() {
         initListener()
     }
 
-    override fun onStart() {
-        super.onStart()
-    }
-
     private fun launchHomeActivity() {
         val intent = Intent(this, HomeActivity::class.java)
         startActivity(intent)
@@ -64,10 +56,10 @@ class MessageActivity : AppCompatActivity() {
         rv_Messages.layoutManager = linearLayoutManager
         scrollListener = object : EndlessRecyclerViewScrollListener(linearLayoutManager) {
             override fun onLoadMore1(page: Int, totalItemsCount: Int, view: RecyclerView?) {
-                requestNextMessage()
+                requestMessage(current_Page!!)
             }
             override fun onRefresh() {
-                requestFirstMessage()
+                requestMessage(0)
             }
         }
         rv_Messages.addOnScrollListener(scrollListener)
@@ -77,38 +69,39 @@ class MessageActivity : AppCompatActivity() {
     private fun initListener() {
         // Adapter item clickListener
         messageAdapter.setItemClickListener {
-//            Intent(Intent.ACTION_VIEW, Uri.parse(message.content)).takeIf {
-//                it.resolveActivity(packageManager) != null
-//            }?.run(this::startActivity)
-//
-//            Toast.makeText(this, message.content, Toast.LENGTH_SHORT).show()
+
         }
 
-        requestFirstMessage()
+        requestMessage(0)
     }
 
-    private fun requestFirstMessage() {
+    private fun requestMessage(pageNO: Int) {
         if( loading )
             return
+
+        if( pageNO != 0 && next_page_url == null )
+            return
+
         showLoading()
         scrollListener.resetState()
 
 
-        ClientAPIService.requestMessage(PrefsManager.newInstance(this).getToken(), 0) { succeeded, result ->
+        ClientAPIService.requestMessage(PrefsManager.newInstance(this).getToken(), pageNO+1) { succeeded, result ->
             if (succeeded) {
                 val msgData: MessageData? = result
                 current_Page = msgData?.current_page
                 next_page_url = msgData?.next_page_url
-                val messageList: ArrayList<MessageList> = arrayListOf<MessageList>()
+                val messageList: ArrayList<MessageList> = arrayListOf()
                 for (item in msgData?.data!!) {
-                    val date = LocalDate.parse(item.date, DateTimeFormatter.ISO_DATE)
-                    messageList.add(MessageList(date.month.toString(), date.dayOfMonth, item.message))
+                    messageList.add(MessageList(item.date, item.message))
                 }
 
-                messageAdapter.clear()
+                if( pageNO == 0 )
+                    messageAdapter.clear()
                 messageAdapter.setItems(messageList)
-                onToastMessage("success adapter initialization and loading message data")
+                messageAdapter.notifyDataSetChanged()
                 scrollListener.setLoaded()
+
                 hideLoading()
             }
             else {
@@ -116,50 +109,11 @@ class MessageActivity : AppCompatActivity() {
                 hideLoading()
             }
 
-        }
-    }
-
-    fun requestNextMessage() {
-        if( loading )
-            return
-        if( next_page_url == null )
-            return
-
-        showLoading()
-
-
-        ClientAPIService.requestMessage(PrefsManager.newInstance(this).getToken(), current_Page!!+1) { succeeded, result ->
-            if (succeeded) {
-                val msgData: MessageData? = result
-
-                if( msgData?.data  == null || msgData.data.size < 1)
-                    onToastMessage("there is no exist no longer")
-                else {
-                    current_Page = msgData.current_page
-                    next_page_url = msgData.next_page_url
-                    val messageList: ArrayList<MessageList> = arrayListOf<MessageList>()
-
-                    for (item in msgData.data) {
-                        val date = LocalDate.parse(item.date, DateTimeFormatter.ISO_DATE)
-                        messageList.add(MessageList(date.month.toString(), date.dayOfMonth, item.message))
-                    }
-
-                    messageAdapter.setItems(messageList)
-                    onToastMessage("page number ${current_Page}")
-                }
-                scrollListener.setLoaded()
-                hideLoading()
-            }
-            else {
-                onToastMessage("Network Error")
-                hideLoading()
-            }
         }
     }
 
     private fun onToastMessage(message: String) {
-//        Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
-        Log.d("message status", message)
+//        Log.d("message status", message)
     }
 
     private fun showLoading() {

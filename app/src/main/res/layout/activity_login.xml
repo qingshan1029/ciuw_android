@@ -53,108 +53,85 @@
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="0dp"
+                    android:layout_height="wrap_content"
                     android:weightSum="1"
-                    android:layout_weight="0.8"
                     android:orientation="vertical">
 
-                    <LinearLayout
+                    <TextView
+                        android:id="@+id/tv_email"
                         android:layout_width="match_parent"
-                        android:layout_height="0dp"
-                        android:weightSum="1"
-                        android:layout_weight="0.65"
-                        android:orientation="vertical">
-
-                        <TextView
-                            android:id="@+id/tv_email"
-                            android:layout_width="match_parent"
-                            android:layout_height="0dp"
-                            android:layout_weight="0.15"
-                            android:textColor="@color/whiteTextColor"
-                            android:gravity="bottom"
-                            android:textSize="@dimen/primaryTextViewSizeMin"
-                            android:text="@string/login_email"/>
-                        <EditText
-                            android:id="@+id/et_email"
-                            android:layout_width="match_parent"
-                            android:layout_height="@dimen/primaryControlSize"
-                            android:layout_marginTop="10dp"
-                            android:background="@drawable/et_style"
-                            android:inputType="textEmailAddress"
-                            android:maxLines="1"
-                            android:paddingLeft="16dp"
-                            android:textSize="@dimen/primaryEditTextSizeMin">
-                        </EditText>
-                        <TextView
-                            android:id="@+id/tv_password"
-                            android:layout_width="match_parent"
-                            android:layout_height="0dp"
-                            android:layout_weight="0.15"
-                            android:layout_marginTop="10dp"
-                            android:textColor="@color/whiteTextColor"
-                            android:gravity="bottom"
-                            android:textSize="@dimen/primaryTextViewSizeMin"
-                            android:text="@string/login_password"/>
-                        <EditText
-                            android:id="@+id/et_password"
-                            android:layout_width="match_parent"
-                            android:layout_height="@dimen/primaryControlSize"
-                            android:layout_marginTop="10dp"
-                            android:background="@drawable/et_style"
-                            android:inputType="textPassword"
-                            android:maxLines="1"
-                            android:paddingLeft="16dp"
-                            android:textSize="@dimen/primaryEditTextSizeMin">
-                        </EditText>
-                        <TextView
-                            android:id="@+id/tv_pw_forgot"
-                            android:layout_width="wrap_content"
-                            android:layout_height="0dp"
-                            android:layout_weight="0.15"
-                            android:layout_marginTop="10dp"
-                            android:textColor="@color/whiteTextColor"
-                            android:layout_gravity="right"
-                            android:gravity="bottom"
-                            android:textSize="@dimen/primaryTextViewSizeMin"
-                            android:text="@string/login_pw_forgot"/>
-                    </LinearLayout>
-
-                    <LinearLayout
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/whiteTextColor"
+                        android:gravity="bottom"
+                        android:textSize="@dimen/primaryTextViewSizeMin"
+                        android:text="@string/login_email"/>
+                    <EditText
+                        android:id="@+id/et_email"
                         android:layout_width="match_parent"
-                        android:layout_height="0dp"
-                        android:weightSum="1"
-                        android:layout_weight="0.35"
-                        android:orientation="vertical">
-                        <Button
-                            android:id="@+id/btn_login"
-                            android:layout_width="match_parent"
-                            android:layout_height="@dimen/primaryControlSize"
-                            android:background="@color/login_btn_bk_color"
-                            android:textColor="@color/whiteTextColor"
-                            android:textSize="@dimen/primaryButtonTextSize"
-                            android:text="@string/login_btn_login"/>
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="0dp"
-                            android:layout_weight="0.4"/>
-                        <Button
-                            android:id="@+id/btn_register"
-                            android:layout_width="match_parent"
-                            android:layout_height="@dimen/primaryControlSize"
-                            android:background="@color/login_btn_bk_color"
-                            android:textColor="@color/whiteTextColor"
-                            android:textSize="@dimen/primaryButtonTextSize"
-                            android:text="@string/login_btn_register"/>
-                    </LinearLayout>
-
+                        android:layout_height="@dimen/primaryControlSize"
+                        android:layout_marginTop="10dp"
+                        android:background="@drawable/et_style"
+                        android:inputType="textEmailAddress"
+                        android:maxLines="1"
+                        android:paddingLeft="16dp"
+                        android:textSize="@dimen/primaryEditTextSizeMin">
+                    </EditText>
+                    <TextView
+                        android:id="@+id/tv_password"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:textColor="@color/whiteTextColor"
+                        android:gravity="bottom"
+                        android:textSize="@dimen/primaryTextViewSizeMin"
+                        android:text="@string/login_password"/>
+                    <EditText
+                        android:id="@+id/et_password"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/primaryControlSize"
+                        android:layout_marginTop="10dp"
+                        android:background="@drawable/et_style"
+                        android:inputType="textPassword"
+                        android:maxLines="1"
+                        android:paddingLeft="16dp"
+                        android:textSize="@dimen/primaryEditTextSizeMin">
+                    </EditText>
+                    <TextView
+                        android:id="@+id/tv_pw_forgot"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:textColor="@color/whiteTextColor"
+                        android:layout_gravity="right"
+                        android:gravity="bottom"
+                        android:textSize="@dimen/primaryTextViewSizeMin"
+                        android:text="@string/login_pw_forgot"/>
                 </LinearLayout>
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="0dp"
-                    android:layout_weight="0.2">
-                </LinearLayout>
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="40dp"
+                    android:orientation="vertical">
+                    <Button
+                        android:id="@+id/btn_login"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/primaryButtonSize"
+                        android:background="@color/login_btn_bk_color"
+                        android:textColor="@color/whiteTextColor"
+                        android:textSize="@dimen/primaryButtonTextSize"
+                        android:text="@string/login_btn_login"/>
 
+                    <Button
+                        android:id="@+id/btn_register"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/primaryButtonSize"
+                        android:layout_marginTop="20dp"
+                        android:background="@color/login_btn_bk_color"
+                        android:textColor="@color/whiteTextColor"
+                        android:textSize="@dimen/primaryButtonTextSize"
+                        android:text="@string/login_btn_register"/>
+                </LinearLayout>
             </LinearLayout>
 
             <LinearLayout

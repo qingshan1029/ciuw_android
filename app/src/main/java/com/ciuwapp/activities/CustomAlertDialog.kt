@@ -77,7 +77,7 @@ class CustomAlertDialog(Context: Context): Dialog(Context) {
                 htmlString = Html.fromHtml(text, HtmlCompat.FROM_HTML_MODE_LEGACY)
             }
             else{
-                htmlString = Html.fromHtml(text, HtmlCompat.FROM_HTML_MODE_LEGACY)
+                htmlString = Html.fromHtml(text)
             }
             textBody?.text = htmlString
 

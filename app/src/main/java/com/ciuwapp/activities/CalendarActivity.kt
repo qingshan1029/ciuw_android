@@ -3,9 +3,7 @@ import android.content.Intent
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.view.View
-import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.ciuwapp.R
@@ -13,14 +11,10 @@ import com.ciuwapp.adapter.CalendarAdapter
 import com.ciuwapp.api.ClientAPIService
 import com.ciuwapp.data.CalendarData
 import com.ciuwapp.listener.EndlessRecyclerViewScrollListener
-import com.ciuwapp.model.Calendar
+import com.ciuwapp.model.CalendarList
 import com.ciuwapp.prefs.PrefsManager
 import kotlinx.android.synthetic.main.activity_calendar.*
-import java.text.SimpleDateFormat
-import java.time.LocalDate
-import java.time.LocalTime
 import kotlin.collections.ArrayList
-import java.time.format.DateTimeFormatter
 
 class CalendarActivity : AppCompatActivity() {
 
@@ -63,10 +57,10 @@ class CalendarActivity : AppCompatActivity() {
         rv_calendar.layoutManager = linearLayoutManager
         scrollListener = object : EndlessRecyclerViewScrollListener(linearLayoutManager) {
             override fun onLoadMore1(page: Int, totalItemsCount: Int, view: RecyclerView?) {
-                requestNextCalendar()
+                requestCalendar(current_Page!!)
             }
             override fun onRefresh() {
-                requestFirstCalendar()
+                requestCalendar(0)
             }
         }
         rv_calendar.addOnScrollListener(scrollListener)
@@ -83,80 +77,37 @@ class CalendarActivity : AppCompatActivity() {
             onToastMessage(calendar.websiteurl)
         }
 
-        requestFirstCalendar()
+        requestCalendar(0)
     }
 
-    override fun onStart() {
-        super.onStart()
-    }
-
-    private fun requestFirstCalendar() {
+    private fun requestCalendar(pageNO: Int) {
         if( loading )
             return
+
+        if( pageNO != 0 && next_page_url == null )
+            return
+
         showLoading()
         scrollListener.resetState()
 
-        ClientAPIService.requestCalendar(PrefsManager.newInstance(this).getToken(), 0) { succeeded, result ->
+
+        ClientAPIService.requestCalendar(PrefsManager.newInstance(this).getToken(), pageNO+1) { succeeded, result ->
 
             if (succeeded) {
                 val msgData: CalendarData? = result
                 current_Page = msgData?.current_page
                 next_page_url = msgData?.next_page_url
-                val calendarList: ArrayList<Calendar> = arrayListOf<Calendar>()
-
+                val calendarList: ArrayList<CalendarList> = arrayListOf()
                 for (item in msgData?.data!!) {
-                    val date = LocalDate.parse(item.date, DateTimeFormatter.ISO_DATE)
-                    var sdf = SimpleDateFormat("HH:mm:ss")
-                    var sdfs = SimpleDateFormat("hh:mm aa")
-
-                    val start_time = sdf.parse(item.start_time)
-                    val end_time = sdf.parse(item.end_time)
-
-                    if( start_time != null && end_time != null )
-                        calendarList.add(Calendar(date.month.toString(), date.dayOfMonth, sdfs.format(start_time), sdfs.format(end_time), item.title, item.location, item.websiteurl))
+                    calendarList.add(CalendarList(item.date, item.start_time, item.end_time, item.title, item.location, item.websiteurl))
                 }
 
-                calendarAdapter.clear()
+                if( pageNO == 0 )
+                    calendarAdapter.clear()
                 calendarAdapter.setItems(calendarList)
-                onToastMessage("success adapter initialization and loading message data")
                 scrollListener.setLoaded()
                 hideLoading()
             }
-            else {
-                onToastMessage("Network Error")
-                hideLoading()
-            }
-        }
-    }
-
-    fun requestNextCalendar() {
-        if( loading )
-            return
-        if( next_page_url == null )
-            return
-
-        showLoading()
-
-        ClientAPIService.requestCalendar(PrefsManager.newInstance(this).getToken(), current_Page!!+1) { succeeded, result ->
-
-            if (succeeded) {
-                val msgData: CalendarData? = result
-                current_Page = msgData?.current_page
-                next_page_url = msgData?.next_page_url
-                val calendarList: ArrayList<Calendar> = arrayListOf<Calendar>()
-
-                for (item in msgData?.data!!) {
-                    val date = LocalDate.parse(item.date, DateTimeFormatter.ISO_DATE)
-                    var start_time = LocalTime.parse(item.start_time, DateTimeFormatter.ofPattern("a"))
-
-                    calendarList.add(Calendar(date.month.toString(), date.dayOfMonth, start_time.toString(), item.end_time, item.title, item.location, item.websiteurl))
-                }
-                calendarAdapter.setItems(calendarList)
-                onToastMessage("page number ${current_Page}")
-                scrollListener.setLoaded()
-                hideLoading()
-            }
-
             else {
                 onToastMessage("Network Error")
                 hideLoading()
@@ -165,8 +116,7 @@ class CalendarActivity : AppCompatActivity() {
     }
 
     private fun onToastMessage(message: String) {
-//        Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
-        Log.d("message status", message)
+//        Log.d("message status", message)
     }
 
     private fun showLoading() {
