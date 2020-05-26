@@ -73,12 +73,14 @@ class RegisterActivity : AppCompatActivity() {
         ClientAPIService.requestRegister(email, password, password, firstname, lastname) { succeeded, result ->
             hud.dismiss()
             if (succeeded == 201) {
-                hud.setLabel("Registration successful.")
-                    .show()
-                Handler().postDelayed({
-                    hud.dismiss()
-                    launchLoginActivity()
-                }, 2000)
+//                hud.setLabel("Registration successful.")
+//                    .show()
+//                Handler().postDelayed({
+//                    hud.dismiss()
+//                    launchLoginActivity()
+//                }, 2000)
+
+                launchRegisterSuccess("Your registration has been submitted but needs to be approved by an administrator. You will be notified once it has been approved.")
             } else if( succeeded == 400 ) {  // error: Existing email or password is not matched
                 hud.setLabel("Existing email.")
                     .show()
@@ -105,6 +107,27 @@ class RegisterActivity : AppCompatActivity() {
 
 
         var clickListenerOk = View.OnClickListener {
+            dlg.dismiss()
+        }
+
+        dlg.setIcon(R.drawable.ic_close_black_24dp)
+        dlg.setConfirmButtonListener(clickListenerOk)
+        dlg.setConfirmText("OK")
+        dlg.confirmButtonColor(R.color.colorPrimary)
+        dlg.setTitleText("CIUW")
+        dlg.setContentText(text)
+
+        dlg.show()
+
+    }
+
+    private fun launchRegisterSuccess(text: String) {
+
+        var dlg = CustomAlertDialog(this)
+
+
+        var clickListenerOk = View.OnClickListener {
+            launchLoginActivity()
             dlg.dismiss()
         }
 

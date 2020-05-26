@@ -106,6 +106,11 @@ class CalendarActivity : AppCompatActivity() {
                     calendarAdapter.clear()
                 calendarAdapter.setItems(calendarList)
                 scrollListener.setLoaded()
+
+                if( calendarAdapter.itemCount < 1 )
+                    tv_empty_events.visibility = View.VISIBLE
+                else
+                    tv_empty_events.visibility = View.GONE
                 hideLoading()
             }
             else {

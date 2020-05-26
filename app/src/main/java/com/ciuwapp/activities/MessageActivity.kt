@@ -15,6 +15,8 @@ import com.ciuwapp.data.*
 import com.ciuwapp.listener.EndlessRecyclerViewScrollListener
 import com.ciuwapp.model.MessageList
 import com.ciuwapp.prefs.PrefsManager
+import kotlinx.android.synthetic.main.activity_calendar.*
+import kotlinx.android.synthetic.main.activity_message.tv_empty_messages
 import kotlin.collections.ArrayList
 
 class MessageActivity : AppCompatActivity() {
@@ -101,6 +103,11 @@ class MessageActivity : AppCompatActivity() {
                 messageAdapter.setItems(messageList)
                 messageAdapter.notifyDataSetChanged()
                 scrollListener.setLoaded()
+
+                if( messageAdapter.itemCount < 1 )
+                    tv_empty_messages.visibility = View.VISIBLE
+                else
+                    tv_empty_messages.visibility = View.GONE
 
                 hideLoading()
             }

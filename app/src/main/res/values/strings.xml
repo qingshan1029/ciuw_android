@@ -18,11 +18,15 @@
 
 
     <string name="calendar">CALENDAR</string>
-    <string name="message">MESSAGE</string>
+    <string name="message">MESSAGES</string>
     <string name="benefits">BENEFITS</string>
     <string name="contract">CONTRACT</string>
     <string name="meeting">MEETING</string>
     <string name="contact">CONTACT</string>
+
+    <string name="no_message">No messages are available.</string>
+    <string name="no_event">No events are available.</string>
+
 
 
     <string name="verify_title">Verification code is sent to your email.</string>
