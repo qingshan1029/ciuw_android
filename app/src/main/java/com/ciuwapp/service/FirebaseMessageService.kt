@@ -64,9 +64,9 @@ class FirebaseMessageService : FirebaseMessagingService() {
         lateinit var intent: Intent
         val postId = post_id?.toInt()
 
-        if(title.equals("message"))
+        if(title?.toUpperCase()!!.contains("MESSAGE"))
             intent = Intent(applicationContext, MessageActivity::class.java)
-        else if(title.equals("event"))
+        else if(title?.toUpperCase().contains("EVENT"))
             intent = Intent(applicationContext, CalendarActivity::class.java)
         else
             intent = Intent(applicationContext, HomeActivity::class.java)
