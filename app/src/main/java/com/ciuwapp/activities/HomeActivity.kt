@@ -8,6 +8,8 @@ import com.ciuwapp.R
 import com.ciuwapp.prefs.PrefsManager
 import kotlinx.android.synthetic.main.activity_home.*
 import com.ciuwapp.api.ClientAPIService
+import com.google.firebase.messaging.FirebaseMessaging
+
 class HomeActivity : AppCompatActivity() {
 
     private var webURL : String = ""
@@ -54,6 +56,7 @@ class HomeActivity : AppCompatActivity() {
             webTitle = "CONTACT"
             launchWebViewActivity()
         }
+        FirebaseMessaging.getInstance().subscribeToTopic("general")
     }
 
     private fun launchAlertDialog() {

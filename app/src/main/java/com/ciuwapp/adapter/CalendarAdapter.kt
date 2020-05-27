@@ -12,17 +12,15 @@ import java.util.*
 
 
 
-
 class CalendarAdapter : RecyclerView.Adapter<CalendarAdapter.CalendarViewHolder>() {
 
     private lateinit var clickCallBack: (CalendarList) -> Unit
     private val items: ArrayList<CalendarList> = ArrayList()
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int ): CalendarAdapter.CalendarViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int ): CalendarViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.list_calendar_item, parent, false)
         val viewHolder = CalendarViewHolder(view)
         view.setOnClickListener {
-//          clickListener.invoke(items[viewHolder.adapterPosition])
             clickCallBack(items[viewHolder.adapterPosition])
         }
         return viewHolder
@@ -33,23 +31,36 @@ class CalendarAdapter : RecyclerView.Adapter<CalendarAdapter.CalendarViewHolder>
         return items.size
     }
 
-    override fun onBindViewHolder(holder: CalendarAdapter.CalendarViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: CalendarViewHolder, position: Int) {
         val months = arrayOf("JAN", "FEB", "MAR", "APR", "MAY", "JUN", "JUL", "AUG", "SEP", "OCT", "NOV", "DEC")
         val sdf = SimpleDateFormat("HH:mm:ss")
         val sdfs = SimpleDateFormat("hh:mm aa")
         val sdfymd = SimpleDateFormat("yyyy-MM-dd")
 
-        val calendar = Calendar.getInstance()
-        calendar.setTime(sdfymd.parse(items.get(position).date))
+        if(items.get(position).start_time != null)
+            holder.start_time.text = sdfs.format(sdf.parse(items.get(position).start_time!!)!!).toString()
+        else
+            holder.start_time.text = ""
 
-        holder.month.text = months.get(calendar.get(Calendar.MONTH))
-        holder.day.text = calendar.get(Calendar.DAY_OF_MONTH).toString()
-        holder.start_time.text = sdfs.format(sdf.parse(items.get(position).start_time)).toString()
-        holder.end_time.text = sdfs.format(sdf.parse(items.get(position).end_time)).toString()
+        if(items.get(position).end_time != null)
+            holder.end_time.text = sdfs.format(sdf.parse(items.get(position).end_time!!)!!).toString()
+        else
+            holder.end_time.text = ""
+
+        if(items.get(position).date != null) {
+            val calendar = Calendar.getInstance()
+            calendar.setTime(sdfymd.parse(items.get(position).date!!)!!)
+            holder.month.text = months.get(calendar.get(Calendar.MONTH))
+            holder.day.text = calendar.get(Calendar.DAY_OF_MONTH).toString()
+        }
+        else {
+            holder.month.text = ""
+            holder.day.text = ""
+        }
+
         holder.content.text = items.get(position).content
         holder.address.text = items.get(position).address
     }
-
 
     class CalendarViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView){
         val month = itemView.findViewById<TextView>(R.id.tv_calendar_month)

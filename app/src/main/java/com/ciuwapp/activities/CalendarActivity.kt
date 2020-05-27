@@ -74,7 +74,7 @@ class CalendarActivity : AppCompatActivity() {
                 it.resolveActivity(packageManager) != null
             }?.run(this::startActivity)
 
-            onToastMessage(calendar.websiteurl)
+            onToastMessage(calendar.websiteurl!!)
         }
 
         requestCalendar(0)
