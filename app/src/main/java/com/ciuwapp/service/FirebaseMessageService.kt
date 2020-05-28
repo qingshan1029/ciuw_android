@@ -71,20 +71,24 @@ class FirebaseMessageService : FirebaseMessagingService() {
         var eventBudges = PrefsManager.newInstance(this).getEventBadges()
 
         if(title?.toUpperCase()!!.contains("MESSAGE")){
-            messageBudges++
-            PrefsManager.newInstance(this).setMessageBadges(messageBudges)
             intent = Intent(applicationContext, MessageActivity::class.java)
+            if(title?.toUpperCase()!!.contains("CREATED")) {
+                messageBudges++
+                PrefsManager.newInstance(this).setMessageBadges(messageBudges)
+            }
         }
         else if(title?.toUpperCase().contains("EVENT")) {
-            eventBudges++
-            PrefsManager.newInstance(this).setEventBadges(eventBudges)
             intent = Intent(applicationContext, CalendarActivity::class.java)
+            if(title?.toUpperCase()!!.contains("CREATED")) {
+                eventBudges++
+                PrefsManager.newInstance(this).setEventBadges(eventBudges)
+            }
         }
         else
             intent = Intent(applicationContext, HomeActivity::class.java)
 
-        // Update badges
-        ShortcutBadger.applyCount(this, messageBudges+eventBudges) //for 1.1.4+
+        if(title?.toUpperCase()!!.contains("CREATED"))
+            ShortcutBadger.applyCount(this, messageBudges+eventBudges) //for 1.1.4+
 
 //        intent.putExtra(HomeActivity.EXTRA_ID, postId)
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
