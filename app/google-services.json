@@ -1,38 +1,38 @@
 {
   "project_info": {
-    "project_number": "943774822454",
-    "firebase_url": "https://ciuw-c2e1a.firebaseio.com",
-    "project_id": "ciuw-c2e1a",
-    "storage_bucket": "ciuw-c2e1a.appspot.com"
+    "project_number": "475979906862",
+    "firebase_url": "https://ciuw-a7465.firebaseio.com",
+    "project_id": "ciuw-a7465",
+    "storage_bucket": "ciuw-a7465.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:943774822454:android:2e1beed4ed07d4f98be897",
+        "mobilesdk_app_id": "1:475979906862:android:23d84c37dde01034b144bf",
         "android_client_info": {
           "package_name": "com.ciuwapp"
         }
       },
       "oauth_client": [
         {
-          "client_id": "943774822454-ml9s02qvn5ea7vgvoiq2dsmq6g7983fm.apps.googleusercontent.com",
+          "client_id": "475979906862-2b52sekj85pud8btjbl1ebr9t67n99g6.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyANdVMeOn3lnMN01JmmnMIJYwzy2kSg1G0"
+          "current_key": "AIzaSyACpNHVc_17uEWn1DtRPKSECw6yQpBiGiA"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "943774822454-ml9s02qvn5ea7vgvoiq2dsmq6g7983fm.apps.googleusercontent.com",
+              "client_id": "475979906862-2b52sekj85pud8btjbl1ebr9t67n99g6.apps.googleusercontent.com",
               "client_type": 3
             },
             {
-              "client_id": "943774822454-taij2thqa3aeiui49qcntvqafhb65dus.apps.googleusercontent.com",
+              "client_id": "475979906862-psk9u2r61pvvjdu1be9a1g4i0pbv6pt8.apps.googleusercontent.com",
               "client_type": 2,
               "ios_info": {
                 "bundle_id": "app.ciuw.org.ciuw"
