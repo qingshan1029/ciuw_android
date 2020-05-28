@@ -11,7 +11,8 @@ class PrefsManager(context: Context){
     private val KEY_EMAIL = "email_address"
     private val KEY_PASSWORD = "userpassword"
     private val KEY_TOKEN = "token"
-
+    private val KEY_BADGE_EVENT = "badge_event"
+    private val KEY_BADGE_MESSAGE = "badge_message"
     private val preferences: SharedPreferences = context.getSharedPreferences(PREF_NAME, PRIVATE_MODE)
 
     fun setEmail(value: String) {
@@ -46,6 +47,26 @@ class PrefsManager(context: Context){
     fun getToken(): String {
         return preferences.getString(KEY_TOKEN, "") ?: ""
     }
+
+    fun setEventBadges(value: Int){
+        val editor: SharedPreferences.Editor = preferences.edit()
+        editor.putInt(KEY_BADGE_EVENT, value)
+        editor.commit()
+    }
+
+    fun getEventBadges(): Int{
+        return preferences.getInt(KEY_BADGE_EVENT, 0)
+    }
+    fun setMessageBadges(value: Int){
+        val editor: SharedPreferences.Editor = preferences.edit()
+        editor.putInt(KEY_BADGE_MESSAGE, value)
+        editor.commit()
+    }
+
+    fun getMessageBadges(): Int{
+        return preferences.getInt(KEY_BADGE_MESSAGE, 0)
+    }
+
     fun logout(){
         val editor: SharedPreferences.Editor = preferences.edit()
         editor.putString(KEY_USERID, "")

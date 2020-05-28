@@ -15,9 +15,11 @@ import com.ciuwapp.data.*
 import com.ciuwapp.listener.EndlessRecyclerViewScrollListener
 import com.ciuwapp.model.MessageList
 import com.ciuwapp.prefs.PrefsManager
-import kotlinx.android.synthetic.main.activity_calendar.*
 import kotlinx.android.synthetic.main.activity_message.tv_empty_messages
 import kotlin.collections.ArrayList
+import me.leolin.shortcutbadger.ShortcutBadger
+
+
 
 class MessageActivity : AppCompatActivity() {
     private var current_Page: Int? = 0
@@ -33,13 +35,18 @@ class MessageActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_message)
 
+        initView()
+        initAdapter()
+        initListener()
+
         id_message_back.setOnClickListener {
             launchHomeActivity()
         }
 
-        initView()
-        initAdapter()
-        initListener()
+        // Update badge
+        PrefsManager.newInstance(this).setMessageBadges(0)
+        val eventBudges = PrefsManager.newInstance(this).getEventBadges()
+        ShortcutBadger.applyCount(this, eventBudges) //for 1.1.4+
     }
 
     private fun launchHomeActivity() {
@@ -108,7 +115,13 @@ class MessageActivity : AppCompatActivity() {
                     tv_empty_messages.visibility = View.VISIBLE
                 else
                     tv_empty_messages.visibility = View.GONE
-
+//
+//                // Update badge
+//                PrefsManager.newInstance(this).setMessageBadges(0)
+//                runOnUiThread {
+//                    val eventBudges = PrefsManager.newInstance(this).getEventBadges()
+//                    ShortcutBadger.applyCount(this, eventBudges) //for 1.1.4+
+//                }
                 hideLoading()
             }
             else {

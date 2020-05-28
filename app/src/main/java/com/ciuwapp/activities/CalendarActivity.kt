@@ -14,6 +14,7 @@ import com.ciuwapp.listener.EndlessRecyclerViewScrollListener
 import com.ciuwapp.model.CalendarList
 import com.ciuwapp.prefs.PrefsManager
 import kotlinx.android.synthetic.main.activity_calendar.*
+import me.leolin.shortcutbadger.ShortcutBadger
 import kotlin.collections.ArrayList
 
 class CalendarActivity : AppCompatActivity() {
@@ -39,7 +40,13 @@ class CalendarActivity : AppCompatActivity() {
         id_calendar_back.setOnClickListener {
             launchHomeActivity()
         }
+
+        // Update badge
+        PrefsManager.newInstance(this).setEventBadges(0)
+        val messageBudges = PrefsManager.newInstance(this).getMessageBadges()
+        ShortcutBadger.applyCount(this, messageBudges) //for 1.1.4+
     }
+
 
     private fun launchHomeActivity() {
         val intent = Intent(this, HomeActivity::class.java)
@@ -111,6 +118,13 @@ class CalendarActivity : AppCompatActivity() {
                     tv_empty_events.visibility = View.VISIBLE
                 else
                     tv_empty_events.visibility = View.GONE
+//                // Update badge
+//                PrefsManager.newInstance(this).setEventBadges(0)
+//                runOnUiThread {
+//                    val messageBudges = PrefsManager.newInstance(this).getMessageBadges()
+//                    ShortcutBadger.applyCount(this, messageBudges) //for 1.1.4+
+//                }
+
                 hideLoading()
             }
             else {

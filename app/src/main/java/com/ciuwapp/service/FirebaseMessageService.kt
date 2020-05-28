@@ -18,8 +18,10 @@ import com.ciuwapp.R
 import com.ciuwapp.activities.CalendarActivity
 import com.ciuwapp.activities.HomeActivity
 import com.ciuwapp.activities.MessageActivity
+import com.ciuwapp.prefs.PrefsManager
 import com.google.firebase.messaging.FirebaseMessagingService
 import com.google.firebase.messaging.RemoteMessage
+import me.leolin.shortcutbadger.ShortcutBadger
 import org.json.JSONObject
 
 
@@ -59,17 +61,30 @@ class FirebaseMessageService : FirebaseMessagingService() {
     override fun onNewToken(token: String){
 
     }
+
     private fun launchNotification(title:String?, messageBody: String?, post_id: String?) {
 
         lateinit var intent: Intent
         val postId = post_id?.toInt()
 
-        if(title?.toUpperCase()!!.contains("MESSAGE"))
+        var messageBudges = PrefsManager.newInstance(this).getMessageBadges()
+        var eventBudges = PrefsManager.newInstance(this).getEventBadges()
+
+        if(title?.toUpperCase()!!.contains("MESSAGE")){
+            messageBudges++
+            PrefsManager.newInstance(this).setMessageBadges(messageBudges)
             intent = Intent(applicationContext, MessageActivity::class.java)
-        else if(title?.toUpperCase().contains("EVENT"))
+        }
+        else if(title?.toUpperCase().contains("EVENT")) {
+            eventBudges++
+            PrefsManager.newInstance(this).setEventBadges(eventBudges)
             intent = Intent(applicationContext, CalendarActivity::class.java)
+        }
         else
             intent = Intent(applicationContext, HomeActivity::class.java)
+
+        // Update badges
+        ShortcutBadger.applyCount(this, messageBudges+eventBudges) //for 1.1.4+
 
 //        intent.putExtra(HomeActivity.EXTRA_ID, postId)
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
@@ -101,7 +116,8 @@ class FirebaseMessageService : FirebaseMessagingService() {
             .setSound(defaultSoundUri)
             .setContentTitle(titleBold)
             .setContentText(spanned)
-
+//            .setNumber(120)
+//            .setBadgeIconType(NotificationCompat.BADGE_ICON_SMALL)
 //            .setStyle(NotificationCompat.DecoratedCustomViewStyle())
 //            .setCustomBigContentView(contentView)
 //            .setCustomContentView(contentView)
@@ -111,5 +127,7 @@ class FirebaseMessageService : FirebaseMessagingService() {
         val notification = notificationBuilder.build()
         notificationManager.notify(100, notification)
 
+
     }
+
 }

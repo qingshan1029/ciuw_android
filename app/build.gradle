@@ -48,4 +48,7 @@ dependencies {
     // Firebase
     implementation 'com.google.firebase:firebase-analytics:17.2.2'
     implementation 'com.google.firebase:firebase-messaging:20.1.5'
+
+    // Notification badge
+    implementation "me.leolin:ShortcutBadger:1.1.22@aar"
 }
