@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">CIUWApp</string>
+    <string name="app_name">CIUW</string>
     <string name="login_email_hint">test@example.com</string>
     <string name="login_password_hint">Password</string>
     <string name="login_email">Email</string>
