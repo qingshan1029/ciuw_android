@@ -50,8 +50,8 @@ class MessageActivity : AppCompatActivity() {
     }
 
     private fun launchHomeActivity() {
-        val intent = Intent(this, HomeActivity::class.java)
-        startActivity(intent)
+//        val intent = Intent(this, HomeActivity::class.java)
+//        startActivity(intent)
         finish()
     }
 
@@ -145,4 +145,5 @@ class MessageActivity : AppCompatActivity() {
         loading = false
         progressBar2.visibility = View.GONE
     }
+
 }

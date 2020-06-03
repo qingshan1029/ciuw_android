@@ -3,11 +3,14 @@ package com.ciuwapp.activities
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.*
 import com.ciuwapp.R
 import com.ciuwapp.prefs.PrefsManager
 import kotlinx.android.synthetic.main.activity_home.*
 import com.ciuwapp.api.ClientAPIService
+import com.google.android.gms.tasks.OnCompleteListener
+import com.google.firebase.iid.FirebaseInstanceId
 import com.google.firebase.messaging.FirebaseMessaging
 
 class HomeActivity : AppCompatActivity() {
@@ -56,23 +59,68 @@ class HomeActivity : AppCompatActivity() {
             webTitle = "CONTACT"
             launchWebViewActivity()
         }
+
         FirebaseMessaging.getInstance().subscribeToTopic("general")
+
+        registerPhone()
+    }
+
+    private fun unregisterPhone() {
+        val email = PrefsManager.newInstance(this).getEmail()
+        val fcmToken = PrefsManager.newInstance(this).getFCMToken()
+        val token = PrefsManager.newInstance(this).getToken()
+        ClientAPIService.requestPhoneUnregister(token, email, fcmToken) { succeeded, result ->
+            if (succeeded == 200)
+                Log.d("fcm token unregister", "successful")
+            else
+                Log.d("fcm token unregister", "failed")
+        }
+    }
+
+    private fun registerPhone() {
+        val logTag = String::class.java.simpleName
+        FirebaseInstanceId.getInstance().instanceId
+            .addOnCompleteListener(OnCompleteListener { task ->
+                if (!task.isSuccessful) {
+                    Log.d(logTag, "getInstanceId failed", task.exception)
+                    return@OnCompleteListener
+                }
+
+                // Get new Instance ID token
+                val fcmToken = task.result?.token
+                Log.d("getInstanceId failed", fcmToken)
+                PrefsManager.newInstance(this).setFCMToken(fcmToken!!)
+
+                val email = PrefsManager.newInstance(this).getEmail()
+                val token = PrefsManager.newInstance(this).getToken()
+
+                ClientAPIService.requestPhoneRegister(token, email, fcmToken) { succeeded, result ->
+                    if (succeeded == 200)
+                        Log.d("fcm token registration", "successful")
+                    else
+                        Log.d("fcm token registration", "failed")
+                }
+            })
     }
 
     private fun launchAlertDialog() {
 
-        var dlg = CustomAlertDialog(this)
+        val dlg = CustomAlertDialog(this)
 
-        var clickListenerYes = View.OnClickListener {
+        val clickListenerYes = View.OnClickListener {
+
+            unregisterPhone()
 
             dlg.dismiss()
+
             PrefsManager.newInstance(this).logout()
             val intent = Intent(this@HomeActivity, LoginActivity::class.java)
             intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+            finish()
             startActivity(intent)
         }
 
-        var clickListenerNo = View.OnClickListener {
+        val clickListenerNo = View.OnClickListener {
             dlg.dismiss()
         }
 
@@ -92,13 +140,13 @@ class HomeActivity : AppCompatActivity() {
     private fun launchCalendarActivity() {
         val intent = Intent(this, CalendarActivity::class.java)
         startActivity(intent)
-        finish()
+        //finish()
     }
 
     private fun launchMessageActivity() {
         val intent = Intent(this, MessageActivity::class.java)
         startActivity(intent)
-        finish()
+        //finish()
     }
 
     private fun launchWebViewActivity() {
@@ -106,6 +154,10 @@ class HomeActivity : AppCompatActivity() {
         intent.putExtra("url", "${ClientAPIService.hostURL}${webURL}")
         intent.putExtra("webTitle", webTitle)
         startActivity(intent)
+    }
+
+    override fun onBackPressed() {
+        moveTaskToBack(true)
     }
 
 }

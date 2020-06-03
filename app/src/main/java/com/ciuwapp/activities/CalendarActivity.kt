@@ -49,8 +49,8 @@ class CalendarActivity : AppCompatActivity() {
 
 
     private fun launchHomeActivity() {
-        val intent = Intent(this, HomeActivity::class.java)
-        startActivity(intent)
+//        val intent = Intent(this, HomeActivity::class.java)
+//        startActivity(intent)
         finish()
     }
 
@@ -147,5 +147,4 @@ class CalendarActivity : AppCompatActivity() {
         loading = false
         progressBar1.visibility = View.GONE
     }
-
 }

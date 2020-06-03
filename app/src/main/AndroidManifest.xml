@@ -11,9 +11,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme.NoActionBar"
         android:usesCleartextTraffic="true">
-        <activity android:name=".activities.VerifyCodeActivity"></activity>
-        <activity android:name=".activities.ForgotPasswordActivity" />
-        <activity android:name=".activities.WebViewActivity" />
+
         <activity
             android:name=".activities.SplashActivity"
             android:screenOrientation="portrait">
@@ -25,8 +23,7 @@
         </activity>
         <activity
             android:name=".activities.HomeActivity"
-            android:screenOrientation="portrait"
-            android:launchMode="singleInstance"/>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".activities.LoginActivity"
             android:screenOrientation="portrait" />
@@ -35,13 +32,19 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".activities.MessageActivity"
-            android:screenOrientation="portrait"
-            android:launchMode="singleInstance"/>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".activities.CalendarActivity"
-            android:screenOrientation="portrait"
-            android:launchMode="singleInstance"/>
-
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activities.VerifyCodeActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activities.ForgotPasswordActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activities.WebViewActivity"
+            android:screenOrientation="portrait" />
         <service
             android:name=".service.FirebaseMessageService"
             android:exported="false">

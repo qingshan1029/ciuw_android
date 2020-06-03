@@ -20,3 +20,7 @@ data class UserData (
 data class ErrorData (
     var error: String
 )
+
+data class resultData (
+    var result: String
+)

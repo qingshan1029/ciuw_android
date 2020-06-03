@@ -31,7 +31,7 @@ class ClientAPIService {
                     Log.d("ClientAPIService", "Got the user back ${response.body()}")
                     val code = response.code()
                     if (code == 200 && response.body() != null) {
-                        var postResponse = response.body()!!
+                        val postResponse = response.body()!!
                         callback(code, postResponse)
                     } else if( code == 400 ) {
                         callback(code, null)
@@ -62,7 +62,7 @@ class ClientAPIService {
                     Log.d("ClientAPIService", "Got the user back ${response.body()}")
                     val code = response.code()
                     if (code == 201) {
-                        var postResponse = response.body()!!
+                        val postResponse = response.body()!!
                         callback(code, postResponse)
                     } else if( code == 400 ) {
                         callback(code, null)
@@ -125,10 +125,10 @@ class ClientAPIService {
                     callback(false, null)
                 }
                 override fun onResponse(call: Call<MessageResponse>, response: Response<MessageResponse>) {
-                    Log.d("ClientAPIService-TOKEN", " ${response}")
+                    Log.d("ClientAPIServiceMessage", " ${response}")
                     Log.d("ClientAPIService", "Got the message data ${response.body()}")
                     if (response.body() != null) {
-                        var postResponse = response.body()!!
+                        val postResponse = response.body()!!
                         callback(true, postResponse.messages)
                     } else {
                         callback(false, null)
@@ -149,14 +149,44 @@ class ClientAPIService {
                     callback(false, null)
                 }
                 override fun onResponse(call: Call<CalendarResponse>, response: Response<CalendarResponse>) {
-                    Log.d("ClientAPIService-TOKEN", " ${response}")
+                    Log.d("ClientAPIService-EVENT", " ${response}")
                     Log.d("ClientAPIService", "Got the calendar data ${response.body()}")
                     if (response.body() != null) {
-                        var postResponse = response.body()!!
+                        val postResponse = response.body()!!
                         callback(true, postResponse.events)
                     } else {
                         callback(false, null)
                     }
+                }
+            })
+        }
+
+        fun requestPhoneRegister(
+            token: String, email: String, fcmToken: String, callback: (succeeded: Int, result: UserData?) -> Unit
+        ) {
+            client.requestPhoneRegister("Bearer $token",email,fcmToken).enqueue(object: Callback<UserData>{
+                override fun onFailure(call: Call<UserData>, t: Throwable) {
+
+                    callback(-1, null)
+                }
+                override fun onResponse(call: Call<UserData>, response: Response<UserData>) {
+
+                    callback(response.code(), null)
+                }
+            })
+        }
+
+        fun requestPhoneUnregister(
+            token: String, email: String, fcmToken: String, callback: (succeeded: Int, result: UserData?) -> Unit
+        ) {
+            client.requestPhoneUnregister("Bearer $token",email,fcmToken).enqueue(object: Callback<UserData>{
+                override fun onFailure(call: Call<UserData>, t: Throwable) {
+
+                    callback(-1, null)
+                }
+                override fun onResponse(call: Call<UserData>, response: Response<UserData>) {
+
+                    callback(response.code(), null)
                 }
             })
         }
@@ -209,6 +239,19 @@ interface ClientLoginAPIClient{
         @Query("page") pageNO: Int
         ): Call<CalendarResponse>
 
+    @POST("phoneregister")
+    fun requestPhoneRegister(
+        @Header("Authorization") token: String,
+        @Query("email") email: String,
+        @Query("token") fcmToken: String
+    ): Call<UserData>
+
+    @POST("phoneunregister")
+    fun requestPhoneUnregister(
+        @Header("Authorization") token: String,
+        @Query("email") email: String,
+        @Query("token") fcmToken: String
+    ) : Call<UserData>
 
     companion object Factory {
         fun create(): ClientLoginAPIClient {

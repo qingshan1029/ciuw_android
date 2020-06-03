@@ -32,11 +32,11 @@ class FirebaseMessageService : FirebaseMessagingService() {
     override fun onMessageReceived(remoteMessage: RemoteMessage) {
 
         // Not getting messages here? See why this may be: https://goo.gl/39bRNJ
-        Log.d(TAG, "From: ${remoteMessage?.from}")
+        Log.d(TAG, "From: ${remoteMessage.from}")
 
 
         // Check if message contains a data payload.
-        remoteMessage?.data?.isNotEmpty()?.let {
+        remoteMessage.data.isNotEmpty().let {
             Log.d(TAG, "Message data payload: " + remoteMessage.data)
 
             // Compose and show notification
@@ -71,30 +71,30 @@ class FirebaseMessageService : FirebaseMessagingService() {
         var eventBudges = PrefsManager.newInstance(this).getEventBadges()
 
         if(title?.toUpperCase()!!.contains("MESSAGE")){
-            intent = Intent(applicationContext, MessageActivity::class.java)
-            if(title?.toUpperCase()!!.contains("CREATED")) {
+            intent = Intent(this, MessageActivity::class.java)
+            if(title?.toUpperCase().contains("CREATED")) {
                 messageBudges++
                 PrefsManager.newInstance(this).setMessageBadges(messageBudges)
             }
         }
         else if(title?.toUpperCase().contains("EVENT")) {
-            intent = Intent(applicationContext, CalendarActivity::class.java)
-            if(title?.toUpperCase()!!.contains("CREATED")) {
+            intent = Intent(this, CalendarActivity::class.java)
+            if(title?.toUpperCase().contains("CREATED")) {
                 eventBudges++
                 PrefsManager.newInstance(this).setEventBadges(eventBudges)
             }
         }
         else
-            intent = Intent(applicationContext, HomeActivity::class.java)
+            intent = Intent(this, HomeActivity::class.java)
 
-        if(title?.toUpperCase()!!.contains("CREATED"))
+        if(title?.toUpperCase().contains("CREATED"))
             ShortcutBadger.applyCount(this, messageBudges+eventBudges) //for 1.1.4+
 
 //        intent.putExtra(HomeActivity.EXTRA_ID, postId)
-        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+        intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
 
         val titleBold = SpannableString(title)
-        titleBold.setSpan(StyleSpan(Typeface.BOLD), 0 ,title!!.length, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
+        titleBold.setSpan(StyleSpan(Typeface.BOLD), 0 ,title.length, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
         val spanned = HtmlCompat.fromHtml(messageBody!!, HtmlCompat.FROM_HTML_MODE_LEGACY)
 /*
         val contentView = RemoteViews(packageName, R.layout.notification_layout)
@@ -102,7 +102,7 @@ class FirebaseMessageService : FirebaseMessagingService() {
         contentView.setTextViewText(R.id.titleTextView, title)
         contentView.setTextViewText(R.id.contentTextView, spanned)
 */
-        val pendingIntent = PendingIntent.getActivity(applicationContext, 0, intent, PendingIntent.FLAG_ONE_SHOT)
+        val pendingIntent = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_ONE_SHOT)
         val channelId = getString(R.string.default_notification_channel_id)
         val defaultSoundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION)
 
@@ -112,7 +112,7 @@ class FirebaseMessageService : FirebaseMessagingService() {
             notificationManager.createNotificationChannel(channel)
         }
 
-        val notificationBuilder = NotificationCompat.Builder(applicationContext, channelId)
+        val notificationBuilder = NotificationCompat.Builder(this, channelId)
             .setSmallIcon(R.mipmap.ic_launcher_app)
 //            .setLargeIcon(
 //                BitmapFactory.decodeResource(getResources(), R.mipmap.app_logo))

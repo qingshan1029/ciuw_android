@@ -11,6 +11,7 @@ class PrefsManager(context: Context){
     private val KEY_EMAIL = "email_address"
     private val KEY_PASSWORD = "userpassword"
     private val KEY_TOKEN = "token"
+    private val KEY_FCM_TOKEN = "fcm_token"
     private val KEY_BADGE_EVENT = "badge_event"
     private val KEY_BADGE_MESSAGE = "badge_message"
     private val preferences: SharedPreferences = context.getSharedPreferences(PREF_NAME, PRIVATE_MODE)
@@ -47,7 +48,14 @@ class PrefsManager(context: Context){
     fun getToken(): String {
         return preferences.getString(KEY_TOKEN, "") ?: ""
     }
-
+    fun setFCMToken(value: String) {
+        val editor: SharedPreferences.Editor = preferences.edit()
+        editor.putString(KEY_FCM_TOKEN, value)
+        editor.commit()
+    }
+    fun getFCMToken(): String {
+        return preferences.getString(KEY_FCM_TOKEN, "") ?: ""
+    }
     fun setEventBadges(value: Int){
         val editor: SharedPreferences.Editor = preferences.edit()
         editor.putInt(KEY_BADGE_EVENT, value)
