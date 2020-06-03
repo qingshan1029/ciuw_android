@@ -23,6 +23,7 @@
     <string name="contract">CONTRACT</string>
     <string name="meeting">MEETING</string>
     <string name="contact">CONTACT</string>
+    <string name="miscellaneous">Miscellaneous</string>
 
     <string name="no_message">No messages are available.</string>
     <string name="no_event">No events are available.</string>

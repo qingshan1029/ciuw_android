@@ -60,6 +60,12 @@ class HomeActivity : AppCompatActivity() {
             launchWebViewActivity()
         }
 
+        id_home_miscellaneous.setOnClickListener {
+            webURL = "contents/miscellaneous"
+            webTitle = "Miscellaneous"
+            launchWebViewActivity()
+        }
+
         FirebaseMessaging.getInstance().subscribeToTopic("general")
 
         registerPhone()
