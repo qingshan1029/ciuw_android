@@ -72,14 +72,14 @@ class FirebaseMessageService : FirebaseMessagingService() {
 
         if(title?.toUpperCase()!!.contains("MESSAGE")){
             intent = Intent(this, MessageActivity::class.java)
-            if(title?.toUpperCase().contains("CREATED")) {
+            if(title?.toUpperCase().contains("NEW")) {
                 messageBudges++
                 PrefsManager.newInstance(this).setMessageBadges(messageBudges)
             }
         }
         else if(title?.toUpperCase().contains("EVENT")) {
             intent = Intent(this, CalendarActivity::class.java)
-            if(title?.toUpperCase().contains("CREATED")) {
+            if(title?.toUpperCase().contains("NEW")) {
                 eventBudges++
                 PrefsManager.newInstance(this).setEventBadges(eventBudges)
             }
@@ -87,7 +87,7 @@ class FirebaseMessageService : FirebaseMessagingService() {
         else
             intent = Intent(this, HomeActivity::class.java)
 
-        if(title?.toUpperCase().contains("CREATED"))
+        if(title?.toUpperCase().contains("NEW"))
             ShortcutBadger.applyCount(this, messageBudges+eventBudges) //for 1.1.4+
 
 //        intent.putExtra(HomeActivity.EXTRA_ID, postId)
