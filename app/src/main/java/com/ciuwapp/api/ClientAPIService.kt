@@ -11,7 +11,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 class ClientAPIService {
     companion object {
-        val hostURL = "https://dev5.pinpointdigital.com/"
+        val hostURL = "https://app.ciuw.org/"
         val baseURL = "https://app.ciuw.org/api/"
         val client: ClientLoginAPIClient = ClientLoginAPIClient.create()
 
